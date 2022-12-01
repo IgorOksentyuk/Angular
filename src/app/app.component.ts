@@ -12,7 +12,7 @@ interface IData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular';
+  public title = 'angular';
   public data: IData[] = [
     {
       id: 1,
