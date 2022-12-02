@@ -13,48 +13,36 @@ interface IData {
 })
 export class AppComponent {
   public title = 'angular';
-  public data: IData[] = [
-    {
-      id: 1,
-      name: 'Vegan',
-      price: 10,
-    },
-    {
-      id: 2,
-      name: 'Pepperoni',
-      price: 12,
-    },
-    {
-      id: 3,
-      name: 'Margarita',
-      price: 14,
-    },
-    {
-      id: 4,
-      name: '4 cheeses',
-      price: 17,
-    },
-    {
-      id: 5,
-      name: 'Sweet and sour chicken',
-      price: 15,
-    },
-    {
-      id: 6,
-      name: 'Сheeseburger pizza',
-      price: 13,
-    },
-    {
-      id: 7,
-      name: 'Spicy chicken',
-      price: 17,
-    },
-    {
-      id: 8,
-      name: 'Tasteless pizza',
-      price: 100,
-    },
-  ];
 
-  getData(itemNumber: number) {}
+  public data = this.generateData(8);
+
+  generateData(count: number): IData[] {
+    let dataArray = [];
+    let pizzaNames = [
+      'Vegan',
+      'Pepperoni',
+      'Hot',
+      'Chicken',
+      'Karri',
+      '4 cheeses',
+      'Potato',
+      'Tasty',
+      'Tasteless',
+      'Italiano',
+      'Ukrainian',
+    ];
+
+    for (let index = 0; index < count; index++) {
+      const randomName =
+        pizzaNames[Math.floor(Math.random() * pizzaNames.length)];
+
+      dataArray.push({
+        id: index,
+        name: randomName + ' pizza',
+        price: Number((Math.random() * 3).toFixed(2)),
+      });
+    }
+
+    return dataArray;
+  }
 }
