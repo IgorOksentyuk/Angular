@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="products">
+  <div class="products__title">Products</div>
+  <div class="products__wrapper">
+    <app-product *ngFor="let item of products" [product]="item"></app-product>
+  </div>
+  <button class="products__btn center">Load more</button>
+  <button class="products__btn right-arrow">Admin -></button>
+</div>
