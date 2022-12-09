@@ -1,0 +1,11 @@
+<div class="products__wrapper-item">
+  <p class="products__wrapper-item-title">{{ product.name }}</p>
+  <p
+    appChangePriceColor
+    [price]="product.price"
+    class="products__wrapper-item-price"
+  >
+    {{ product.price | currency : "₴" }}
+  </p>
+  <button class="products__btn">Add to cart</button>
+</div>
