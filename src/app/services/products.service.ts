@@ -29,7 +29,7 @@ export class ProductsService {
       dataArray.push({
         id: index,
         name: randomName + ' pizza',
-        price: Number((Math.random() * 3).toFixed(2)),
+        price: Number((Math.random() * 300).toFixed(2)),
       });
     }
 
