@@ -22,7 +22,7 @@ export class ProductsService {
       'Ukrainian',
     ];
 
-    for (let index = 0; index < count; index++) {
+    for (let index = 1; index < count; index++) {
       const randomName =
         pizzaNames[Math.floor(Math.random() * pizzaNames.length)];
 
