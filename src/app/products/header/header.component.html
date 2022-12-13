@@ -1,9 +1,11 @@
 <header class="header">
   <div class="header__wrapper">
     <div class="header__wrapper-logo"></div>
-    <ul class="header__wrapper-list">
-      <li class="header__wrapper-list-item">Products</li>
-      <li class="header__wrapper-list-item">
+    <div class="header__wrapper-list">
+      <a [routerLink]="'/products'" class="header__wrapper-list-item"
+        >Products</a
+      >
+      <a class="header__wrapper-list-item">
         <svg
           class="cart-svg"
           width="18"
@@ -34,7 +36,7 @@
             stroke-linejoin="round"
           />
         </svg>
-      </li>
-    </ul>
+      </a>
+    </div>
   </div>
 </header>
