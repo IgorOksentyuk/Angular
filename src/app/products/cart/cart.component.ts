@@ -10,7 +10,6 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
   items: IData[] = this.cartService.getItems();
   totalPrice: number;
-  productId: number;
 
   constructor(private cartService: CartService) {}
 
@@ -20,5 +19,6 @@ export class CartComponent implements OnInit {
 
   removeItem(id: number) {
     this.cartService.removeItem(id);
+    this.totalPrice = this.cartService.getTotal();
   }
 }
