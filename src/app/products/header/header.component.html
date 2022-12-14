@@ -5,7 +5,7 @@
       <a [routerLink]="'/products'" class="header__wrapper-list-item"
         >Products</a
       >
-      <a class="header__wrapper-list-item">
+      <a [routerLink]="'/cart'" class="header__wrapper-list-item">
         <svg
           class="cart-svg"
           width="18"
@@ -36,6 +36,7 @@
             stroke-linejoin="round"
           />
         </svg>
+        ({{ getCount() }})
       </a>
     </div>
   </div>
