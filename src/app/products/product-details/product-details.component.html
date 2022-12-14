@@ -6,6 +6,8 @@
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo, laboriosam!
   </p>
   <p class="product__price">{{ product?.price | currency : "₴ " }}</p>
-  <button class="product__button">Add to cart</button>
+  <button (click)="addToCart(product!)" class="product__button">
+    Add to cart
+  </button>
 </div>
 <app-footer></app-footer>
