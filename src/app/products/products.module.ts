@@ -10,6 +10,7 @@ import { ProductComponent } from './product/product.component';
 import { HeaderComponent } from './header/header.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FooterComponent } from './footer/footer.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
     ChangePriceColorDirective,
     ProductDetailsComponent,
     FooterComponent,
+    CartComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule],
   providers: [ProductsService],
@@ -26,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     ProductDetailsComponent,
     FooterComponent,
+    CartComponent,
   ],
 })
 export class ProductsModule {}
