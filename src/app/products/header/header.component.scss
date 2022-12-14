@@ -43,6 +43,17 @@
       &-logo {
         margin: 15px 15px;
       }
+
+      &-list {
+        &-item {
+          margin-right: 27px;
+        }
+      }
+
+      .cart-svg {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 }
