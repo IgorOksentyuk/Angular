@@ -11,5 +11,5 @@
   >
     {{ product.price | currency : "₴" }}
   </p>
-  <button class="products__btn">Add to cart</button>
+  <button (click)="addToCart()" class="products__btn">Add to cart</button>
 </div>
