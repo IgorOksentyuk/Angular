@@ -35,9 +35,4 @@ export class CartService {
       this.items.splice(index, 1);
     }
   }
-
-  clearCart() {
-    this.items = [];
-    return this.items;
-  }
 }
