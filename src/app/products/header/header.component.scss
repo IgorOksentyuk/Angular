@@ -35,6 +35,62 @@
       }
     }
   }
+
+  .tooltip {
+    font-size: 24px;
+    max-width: 543px;
+    min-width: 543px;
+    min-height: 215px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 35px 0 0 364px;
+    background-color: #f6f6f6;
+    border: 2px solid #fe5f1e;
+    border-radius: 20px;
+    z-index: 5;
+
+    &__wrapper {
+      &-item {
+        padding-bottom: 30px;
+
+        &-line {
+          display: flex;
+
+          &-name {
+            min-width: 164px;
+            margin: 57px 77px 6px 50px;
+          }
+
+          &-count {
+            margin: 58px 21px 0px 0px;
+          }
+
+          &-btn {
+            font-size: 24px;
+            width: 177px;
+            height: 50px;
+            margin: 47px 41px 0px 0px;
+            padding: 15px 55px;
+            border: none;
+            border-radius: 24px;
+            color: #f6f6f6;
+            background-color: #fe5f1e;
+            cursor: pointer;
+          }
+        }
+
+        &-price {
+          margin: 0 0 0 50px;
+        }
+      }
+    }
+
+    &__total {
+      align-self: flex-end;
+      margin: 0 40px 40px 0;
+    }
+  }
 }
 
 @media screen and (max-width: 580px) {
