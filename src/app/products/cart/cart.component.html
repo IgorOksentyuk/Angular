@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="cart">
+  <p class="cart__title">Cart</p>
+  <p class="cart__total">Total: {{ totalPrice }} ₴</p>
+  <div class="cart__wrapper">
+    <div *ngFor="let item of items" class="cart__item">
+      <p class="cart__item-name">{{ item.name }}</p>
+      <p class="cart__item-price">{{ item.price | currency : "₴ " }}</p>
+      <button (click)="removeItem(item.id)" class="cart__item-button">
+        Remove from cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
