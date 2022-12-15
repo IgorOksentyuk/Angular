@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 
-import { ProductsService } from '../services/products.service';
 import { ChangePriceColorDirective } from './directives/change-price-color.directive';
 
 import { ProductComponent } from './product/product.component';
@@ -22,7 +21,7 @@ import { CartComponent } from './cart/cart.component';
     CartComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule],
-  providers: [ProductsService],
+  providers: [],
   exports: [
     ProductComponent,
     HeaderComponent,
