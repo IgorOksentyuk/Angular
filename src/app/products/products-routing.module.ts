@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductsComponent } from './products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { CartComponent } from './cart/cart.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -14,15 +10,20 @@ const routes: Routes = [
   {
     path: 'products',
     pathMatch: 'full',
-    component: ProductsComponent,
+    loadChildren: () =>
+      import('./products.component').then((m) => m.ProductsComponent),
   },
   {
     path: 'products/:id',
-    component: ProductDetailsComponent,
+    loadChildren: () =>
+      import('./product-details/product-details.component').then(
+        (m) => m.ProductDetailsComponent
+      ),
   },
   {
     path: 'cart',
-    component: CartComponent,
+    loadChildren: () =>
+      import('./cart/cart.component').then((m) => m.CartComponent),
   },
 ];
 
