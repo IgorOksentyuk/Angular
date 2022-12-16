@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductsComponent],
+  declarations: [AppComponent, ProductsComponent, NotFoundComponent],
   imports: [BrowserModule, ProductsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
