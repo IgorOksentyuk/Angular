@@ -5,10 +5,24 @@ import { IData } from '../models/product.model';
   providedIn: 'root',
 })
 export class CartService {
-  items: IData[] = [];
+  public items: IData[] = [];
+  private _totalPrice: number;
+
+  constructor() {
+    this.totalPrice = this.getTotal();
+  }
+
+  get totalPrice(): number {
+    return this._totalPrice;
+  }
+
+  set totalPrice(totalPrice: number) {
+    this._totalPrice = totalPrice;
+  }
 
   addToCart(product: IData) {
     this.items.push(product);
+    this.totalPrice = this.getTotal();
   }
 
   getItems() {
