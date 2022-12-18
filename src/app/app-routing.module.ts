@@ -4,11 +4,6 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'products',
-  },
-  {
     path: 'products',
     pathMatch: 'full',
     loadChildren: () =>
