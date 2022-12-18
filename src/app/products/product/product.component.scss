@@ -1,0 +1,28 @@
+.products__wrapper-item {
+  display: flex;
+  flex-direction: column;
+  width: 402px;
+  min-height: 271px;
+  margin: 0 39px 48px 0;
+  border-radius: 20px;
+  background-color: #f6f6f6;
+
+  &-title {
+    margin: 37px 0 25px 34px;
+  }
+
+  &-price {
+    margin: 0 0 31px 34px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .products {
+    &__wrapper {
+      &-item {
+        width: 302px;
+        height: 221px;
+      }
+    }
+  }
+}
