@@ -1,0 +1,51 @@
+.navigation {
+  font-size: 36px;
+  height: 100%;
+  width: 306px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #232323;
+  background-color: #fe5f1e;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &-icon {
+      width: 50px;
+      height: 50px;
+      margin: 28px 0 28px 62px;
+      background-color: #f6f6f6;
+      border-radius: 50%;
+    }
+
+    &-item {
+      font-size: 36px;
+      font-weight: 400;
+      padding: 0 0 32px 58px;
+      margin: 0;
+      color: #232323;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    &-item:hover {
+      background-color: #ffdf8c;
+      border-radius: 12px;
+    }
+
+    .active {
+      background-color: #f6f6f6;
+    }
+  }
+
+  &__btn {
+    align-items: flex-end;
+    margin: 0 0 51px 54px;
+    color: #232323;
+
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
