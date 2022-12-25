@@ -15,7 +15,7 @@ const routes: Routes = [
         (m) => m.AdministrationModule
       ),
   },
-  //Not Found Component fix problems//
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
