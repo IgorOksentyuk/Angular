@@ -1,5 +1,9 @@
 <div class="products__wrapper-item">
-  <p class="products__wrapper-item-title">{{ product.name }}</p>
+  <a
+    [routerLink]="['/products', product.id]"
+    class="products__wrapper-item-title"
+    >{{ product.name }}</a
+  >
   <p
     appChangePriceColor
     [price]="product.price"
@@ -7,5 +11,5 @@
   >
     {{ product.price | currency : "₴" }}
   </p>
-  <button class="products__btn">Add to cart</button>
+  <button (click)="addToCart()" class="products__btn">Add to cart</button>
 </div>

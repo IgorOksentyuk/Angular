@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: 'products',
     pathMatch: 'full',
-    loadChildren: () => import('./app.module').then((m) => m.AppModule),
+    loadChildren: () =>
+      import('../app/products/products.module').then((m) => m.ProductsModule),
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: NotFoundComponent,
   },
 ];
 

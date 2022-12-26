@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 import { IData } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
@@ -9,10 +9,12 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['../app.component.scss', './products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
+  @Output()
   public products: IData[];
-  constructor(public svc: ProductsService) {}
+
+  constructor(private svc: ProductsService) {}
 
   ngOnInit(): void {
-    this.products = this.svc.generateData(8);
+    this.products = this.svc.data;
   }
 }

@@ -6,6 +6,20 @@ import { IData } from '../models/product.model';
   providedIn: 'root',
 })
 export class ProductsService {
+  private _data: IData[];
+
+  constructor() {
+    this.data = this.generateData(8);
+  }
+
+  get data(): IData[] {
+    return this._data;
+  }
+
+  set data(data: IData[]) {
+    this._data = data;
+  }
+
   generateData(count: number): IData[] {
     let dataArray = [];
     let pizzaNames = [
@@ -27,7 +41,7 @@ export class ProductsService {
         pizzaNames[Math.floor(Math.random() * pizzaNames.length)];
 
       dataArray.push({
-        id: index,
+        id: index + 1,
         name: randomName + ' pizza',
         price: Number((Math.random() * 300).toFixed(2)),
       });
