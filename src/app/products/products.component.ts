@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { IData } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
@@ -15,6 +16,8 @@ export class ProductsComponent implements OnInit {
   constructor(private svc: ProductsService) {}
 
   ngOnInit(): void {
-    this.products = this.svc.data;
+    this.svc.data.subscribe((res) => {
+      this.products = res;
+    });
   }
 }
