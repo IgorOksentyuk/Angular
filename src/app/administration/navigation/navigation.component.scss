@@ -1,12 +1,13 @@
 .navigation {
   font-size: 36px;
-  height: 100%;
+  height: 100vh;
   width: 306px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: #232323;
   background-color: #fe5f1e;
+  border-radius: 12px;
 
   &__wrapper {
     display: flex;
