@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 
 import { IData } from '../models/product.model';
 
@@ -10,7 +10,7 @@ export class ProductsService {
   private _data$: Observable<IData[]>;
 
   constructor() {
-    this.data = of(this.generateData(8));
+    this.data = of(this.generateData(8)).pipe(delay(1000));
   }
 
   get data(): Observable<IData[]> {
