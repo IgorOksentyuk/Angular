@@ -11,9 +11,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IData | undefined;
-  productId: number;
   products: IData[];
-  item: IData;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,11 +20,11 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+    const productId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.svc.data.subscribe((res) => {
       this.products = res;
+      this.product = this.products.find((el) => el.id == productId);
     });
-    this.product = this.products.find((el) => el.id == this.productId);
   }
 
   addToCart(product: IData) {
