@@ -4,9 +4,12 @@ import {
   Input,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from '@angular/core';
 
 import { CartService } from 'src/app/services/cart.service';
+import { Subscription } from 'rxjs';
+
 import { IData } from 'src/app/models/product.model';
 
 @Component({
@@ -14,19 +17,21 @@ import { IData } from 'src/app/models/product.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input()
   product: IData;
-  visibleTool: boolean;
+  visibleTool: boolean = false;
   items: IData[] = this.cartService.getItems();
   totalPrice: number;
+  price$ = this.cartService.price$;
+  subscription: Subscription;
 
-  constructor(private cartService: CartService, private toolTip: ElementRef) {
-    this.visibleTool = false;
-  }
+  constructor(private cartService: CartService, private toolTip: ElementRef) {}
 
   ngOnInit(): void {
-    this.totalPrice = this.cartService.totalPrice;
+    this.subscription = this.price$.subscribe((res) => {
+      this.totalPrice = Number(res.toFixed(2));
+    });
   }
 
   getCount() {
@@ -42,6 +47,11 @@ export class HeaderComponent implements OnInit {
 
   removeItem(id: number) {
     this.cartService.removeItem(id);
-    this.totalPrice = this.cartService.getTotal();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
