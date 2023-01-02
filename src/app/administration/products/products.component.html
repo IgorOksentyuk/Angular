@@ -1,0 +1,81 @@
+<div class="products">
+  <app-navigation></app-navigation>
+  <div class="products__wrapper">
+    <h1 class="products__title">Products</h1>
+    <div class="products__box">
+      <div class="products__box-row">
+        <input
+          class="products__box-row-input"
+          type="text"
+          placeholder="Search.."
+        />
+        <div class="products__box-row-select">
+          Price more than:
+          <div class="select-arrow"></div>
+        </div>
+        <div class="products__box-row-count">10</div>
+        <div class="products__box-row-apply">Apply</div>
+      </div>
+      <div class="products__box-categories">
+        <div class="products__box-categories-id">
+          ID
+          <div class="select-arrow"></div>
+        </div>
+        <div class="products__box-categories-name">
+          Name
+          <div class="select-arrow"></div>
+        </div>
+        <div class="products__box-categories-price">
+          Price
+          <div class="select-arrow"></div>
+        </div>
+        <div class="add-btn">
+          <svg
+            height="52px"
+            id="plus-icon"
+            style="enable-background: new 0 0 512 512"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="52px"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g>
+              <path
+                d="M384,265H264v119h-17V265H128v-17h119V128h17v120h120V265z"
+              />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <table class="products__box-list">
+        <tr *ngFor="let product of products" class="products__box-list-item">
+          <th class="products__box-list-item-id">{{ product.id }}</th>
+          <th class="products__box-list-item-name">{{ product.name }}</th>
+          <th class="products__box-list-item-price">
+            {{ product.price | currency : "₴" }}
+          </th>
+          <th>
+            <div class="products__box-list-item-edit">
+              <svg
+                height="48"
+                viewBox="0 0 50 50"
+                width="38"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 34.5v7.5h7.5l22.13-22.13-7.5-7.5-22.13 22.13zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z"
+                />
+                <path d="M0 0h48v48h-48z" fill="none" />
+              </svg>
+            </div>
+            <div class="products__box-list-item-delete">
+              <div class="close"></div>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

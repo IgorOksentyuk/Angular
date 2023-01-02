@@ -5,15 +5,17 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
   {
     path: 'products',
-    pathMatch: 'full',
     loadChildren: () =>
       import('../app/products/products.module').then((m) => m.ProductsModule),
   },
   {
-    path: '**',
-    pathMatch: 'full',
-    component: NotFoundComponent,
+    path: 'administration',
+    loadChildren: () =>
+      import('../app/administration/administration.module').then(
+        (m) => m.AdministrationModule
+      ),
   },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

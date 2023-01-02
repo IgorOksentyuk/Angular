@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 import { IData } from '../models/product.model';
 
 @Injectable({
@@ -6,23 +8,14 @@ import { IData } from '../models/product.model';
 })
 export class CartService {
   public items: IData[] = [];
-  private _totalPrice: number;
+  private _price = new BehaviorSubject<number>(0);
+  public price$ = this._price.asObservable();
 
-  constructor() {
-    this.totalPrice = this.getTotal();
-  }
-
-  get totalPrice(): number {
-    return this._totalPrice;
-  }
-
-  set totalPrice(totalPrice: number) {
-    this._totalPrice = totalPrice;
-  }
+  constructor() {}
 
   addToCart(product: IData) {
     this.items.push(product);
-    this.totalPrice = this.getTotal();
+    this.getTotal();
   }
 
   getItems() {
@@ -39,6 +32,7 @@ export class CartService {
     for (let item of this.items) {
       total += item.price;
     }
+    this._price.next(total);
 
     return Number(total.toFixed(2));
   }
@@ -47,6 +41,7 @@ export class CartService {
     let index = this.items.findIndex((el) => el.id === id);
     if (index !== -1) {
       this.items.splice(index, 1);
+      this.getTotal();
     }
   }
 }
