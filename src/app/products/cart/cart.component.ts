@@ -20,6 +20,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscription = this.price$.subscribe((res) => {
       this.totalPrice = Number(res.toFixed(2));
     });
+    this.subscription = this.price$.subscribe((res) => {
+      this.totalPrice = Number(res.toFixed(2));
+    });
   }
 
   removeItem(id: number) {
