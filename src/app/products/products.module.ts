@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ProductsRoutingModule } from './products-routing.module';
 
@@ -20,7 +21,7 @@ import { CartComponent } from './cart/cart.component';
     FooterComponent,
     CartComponent,
   ],
-  imports: [CommonModule, ProductsRoutingModule],
+  imports: [CommonModule, ProductsRoutingModule, MatProgressSpinnerModule],
   providers: [],
   exports: [
     ProductComponent,
@@ -28,6 +29,7 @@ import { CartComponent } from './cart/cart.component';
     ProductDetailsComponent,
     FooterComponent,
     CartComponent,
+    MatProgressSpinnerModule,
   ],
 })
 export class ProductsModule {}

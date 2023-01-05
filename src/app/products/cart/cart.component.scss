@@ -3,6 +3,14 @@
   font-size: 48px;
   margin-left: 93px;
 
+  &__title {
+    margin: 28px 0 43px 0;
+  }
+
+  &__total {
+    margin-bottom: 43px;
+  }
+
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -30,7 +38,7 @@
 
     &-button {
       font-size: 24px;
-      height: 60px;
+      min-height: 60px;
       max-width: 290px;
       align-self: center;
       margin: 0 30px 29px 30px;

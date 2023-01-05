@@ -49,6 +49,7 @@
           </svg>
         </div>
       </div>
+      <mat-spinner color="warn" *ngIf="loading$ | async"></mat-spinner>
       <table class="products__box-list">
         <tr *ngFor="let product of products" class="products__box-list-item">
           <th class="products__box-list-item-id">{{ product.id }}</th>

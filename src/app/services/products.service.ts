@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { delay, Observable, of } from 'rxjs';
 
 import { IData } from '../models/product.model';
 
@@ -6,18 +7,18 @@ import { IData } from '../models/product.model';
   providedIn: 'root',
 })
 export class ProductsService {
-  private _data: IData[];
+  private _data$: Observable<IData[]>;
 
   constructor() {
-    this.data = this.generateData(8);
+    this.data = of(this.generateData(8)).pipe(delay(1000));
   }
 
-  get data(): IData[] {
-    return this._data;
+  get data(): Observable<IData[]> {
+    return this._data$;
   }
 
-  set data(data: IData[]) {
-    this._data = data;
+  set data(data: Observable<IData[]>) {
+    this._data$ = data;
   }
 
   generateData(count: number): IData[] {

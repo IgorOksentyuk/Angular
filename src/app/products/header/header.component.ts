@@ -20,15 +20,13 @@ import { IData } from 'src/app/models/product.model';
 export class HeaderComponent implements OnInit, OnDestroy {
   @Input()
   product: IData;
-  visibleTool: boolean;
+  visibleTool: boolean = false;
   items: IData[] = this.cartService.getItems();
   totalPrice: number;
   price$ = this.cartService.price$;
   subscription: Subscription;
 
-  constructor(private cartService: CartService, private toolTip: ElementRef) {
-    this.visibleTool = false;
-  }
+  constructor(private cartService: CartService, private toolTip: ElementRef) {}
 
   ngOnInit(): void {
     this.subscription = this.price$.subscribe((res) => {
