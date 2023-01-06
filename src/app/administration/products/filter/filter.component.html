@@ -1,13 +1,23 @@
 <div class="products__box-row">
-  <div class="products__box-row-select">
-    <p>Price more than:</p>
-    <div class="select-arrow"></div>
-    <div class="dropdown" #dropdown *ngIf="visibleTool">
-      <p class="dropdown__item">Price more than:</p>
-      <p class="dropdown__item">Price less than:</p>
-    </div>
-  </div>
+  <input
+    class="products__box-row-input"
+    type="text"
+    placeholder="Search.."
+    (input)="search($event)"
+  />
+  <select
+    (change)="priceType($event)"
+    class="products__box-row-select"
+    name="select"
+  >
+    <option value="{{ priceMore }}">{{ priceMore }}</option>
+    <option value="{{ priceLess }}">{{ priceLess }}</option>
+  </select>
 
-  <div class="products__box-row-count">10</div>
-  <div class="products__box-row-apply">Apply</div>
+  <input
+    value="0"
+    type="number"
+    (input)="price($event)"
+    class="products__box-row-count"
+  />
 </div>
