@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { NavigationModule } from '../navigation/navigation.module';
 import { ProductsRoutingModule } from './products-routing.module';
@@ -17,8 +18,9 @@ import { FilterComponent } from './filter/filter.component';
     ProductsRoutingModule,
     NavigationModule,
     MatProgressSpinnerModule,
-    Ng2SearchPipeModule,
     FormsModule,
+    MatSortModule,
+    NgxPaginationModule,
   ],
   exports: [ProductsComponent, MatProgressSpinnerModule, FilterComponent],
 })
