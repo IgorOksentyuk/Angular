@@ -3,145 +3,149 @@
 .products {
   display: flex;
 
-  &__title {
-    font-size: 48px;
-    font-weight: 400;
-    margin: 53px 0 50px 52px;
-  }
+  &__wrapper {
+    width: 100%;
 
-  &__container {
-    display: flex;
-  }
-
-  &__box {
-    font-size: 32px;
-    background-color: #fe5f1e;
-    color: #232323;
-    margin-left: 52px;
-    border-radius: 12px;
-
-    &-row {
-      display: flex;
-
-      &-input {
-        width: 444px;
-        margin: 39px 269px 39px 30px;
-        padding: 15px 0 15px 32px;
-        border-radius: 12px;
-        border: none;
-        outline: none;
-      }
+    &-title {
+      font-size: 48px;
+      font-weight: 400;
+      margin: 53px 0 50px 52px;
     }
 
-    &-categories {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 27px;
+    &-box {
+      font-size: 32px;
+      height: calc(100vh - 200px);
+      width: calc(100% - 54px);
 
-      &-id {
-        display: flex;
-        align-items: center;
-        margin-left: 55px;
-      }
+      background-color: #fe5f1e;
+      color: #232323;
+      margin-left: 52px;
+      border-radius: 12px;
 
-      &-name {
-        display: flex;
-        align-items: center;
-      }
-
-      &-price {
-        display: flex;
-        align-items: center;
-      }
-
-      .add-btn {
-        position: relative;
-
-        width: 50px;
-        height: 50px;
-        margin-right: 72px;
-        background-color: #f6f6f6;
-        border-radius: 50%;
-      }
-
-      .plus-icon {
-        position: absolute;
-        border: 1px dotted #f6f6f6;
-        width: 3px;
-        height: 3px;
-        background-color: black;
-        box-sizing: border-box;
-        transform: scale(10);
-      }
-    }
-
-    mat-spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-    }
-
-    &-list {
-      width: 100%;
-
-      &-item {
+      &-categories {
         display: flex;
         justify-content: space-between;
-        margin: 0 30px 32px 30px;
-        padding: 21px 0 27px 25px;
-        background-color: #f6f6f6;
-        border-radius: 20px;
+        margin-bottom: 27px;
 
-        th {
-          font-weight: 400;
+        &-id {
+          font-weight: 500;
           display: flex;
+          align-items: center;
+          margin-left: 55px;
         }
 
-        &-edit {
+        &-name {
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+        }
+
+        &-price {
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+        }
+
+        .add-btn {
           position: relative;
           width: 50px;
           height: 50px;
+          margin-right: 72px;
+          background-color: #f6f6f6;
           border-radius: 50%;
-          background-color: #ffdf8c;
-          margin-right: 16px;
-        }
-
-        &-delete {
-          position: relative;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background-color: #ffdf8c;
-          margin-right: 16px;
-        }
-
-        &-delete:before,
-        &-delete:after {
-          position: absolute;
-          top: 7px;
-          content: " ";
-          height: 33px;
-          width: 2px;
-          background-color: #333;
-        }
-        &-delete:before {
-          transform: rotate(45deg);
-        }
-        &-delete:after {
-          transform: rotate(-45deg);
+          border: 2px solid #232323;
         }
       }
-    }
 
-    .not-found {
-      font-size: 46px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 46px;
+      mat-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+      }
+
+      &-list {
+        width: 100%;
+
+        &-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 0 30px 32px 30px;
+          padding: 21px 0 27px 25px;
+          background-color: #f6f6f6;
+          border-radius: 20px;
+
+          th {
+            font-weight: 400;
+            display: flex;
+          }
+
+          &-edit {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffdf8c;
+            margin-right: 16px;
+            border: 1px solid #232323;
+          }
+
+          &-delete {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffdf8c;
+            margin-right: 16px;
+            border: 1px solid #232323;
+          }
+
+          &-delete:before,
+          &-delete:after {
+            position: absolute;
+            top: 7px;
+            content: " ";
+            height: 33px;
+            width: 3px;
+            background-color: #232323;
+          }
+          &-delete:before {
+            transform: rotate(45deg);
+          }
+          &-delete:after {
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      .not-found {
+        font-size: 46px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .page-controls {
+        display: flex;
+        justify-content: center;
+      }
+
+      ::ng-deep .ngx-pagination .current {
+        background: #fe5f1e;
+      }
+
+      ::ng-deep .ngx-pagination a {
+        font-weight: 600;
+      }
+
+      ::ng-deep .ngx-pagination a:hover {
+        font-weight: 600;
+        background: none;
+      }
     }
   }
 }
