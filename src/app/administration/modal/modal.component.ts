@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ModalService } from 'src/app/services/modal.service';
-import { ProductConfiguration } from './models/ProductsConfiguration.model';
 import { IData } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-modal',
@@ -13,16 +13,14 @@ import { IData } from 'src/app/models/product.model';
 })
 export class ModalComponent {
   products: IData[] = [];
-  productId: string;
   subscription: Subscription;
-
-  @Output()
-  productAddEvent = new EventEmitter<ProductConfiguration>();
+  errors: string[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private modalService: ModalService,
-    private dialogRef: MatDialogRef<ModalComponent>
+    private dialogRef: MatDialogRef<ModalComponent>,
+    private productsService: ProductsService
   ) {}
 
   setName(event: any): void {
@@ -44,10 +42,15 @@ export class ModalComponent {
   ok() {
     this.subscription = this.modalService.configuration$.subscribe(
       (productConfig) => {
-        productConfig.id = this.productId;
-        this.productAddEvent.emit(productConfig);
-
-        this.dialogRef.close(productConfig);
+        this.productsService.create(productConfig).subscribe(
+          () => {
+            this.productsService.newCreateEvent(productConfig);
+            this.dialogRef.close();
+          },
+          (badResponse) => {
+            this.errors = badResponse.error.message;
+          }
+        );
       }
     );
   }
