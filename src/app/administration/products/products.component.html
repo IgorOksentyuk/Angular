@@ -5,12 +5,11 @@
     <div class="products__wrapper-box">
       <app-filter (filterChangeEvent)="onFilterChange($event)"></app-filter>
 
-      <mat-spinner color="warn" *ngIf="loading$ | async"></mat-spinner>
+      <mat-spinner *ngIf="loading$ | async"></mat-spinner>
       <table
         matSort
         (matSortChange)="sortData($event)"
         class="products__wrapper-box-list"
-        *ngIf="filteredProducts.length; else notFound"
       >
         <tr class="products__wrapper-box-categories">
           <th mat-sort-header="id" class="products__wrapper-box-categories-id">
@@ -28,7 +27,7 @@
           >
             Price
           </th>
-          <th class="add-btn">
+          <th (click)="addProduct()" class="add-btn">
             <svg
               height="52px"
               id="plus-icon"
@@ -48,6 +47,7 @@
             </svg>
           </th>
         </tr>
+
         <tr
           class="products__wrapper-box-list-item"
           *ngFor="
@@ -56,7 +56,7 @@
                 : {
                     currentPage: page,
                     itemsPerPage: displayedProducts,
-                    totalItems: productsCount
+                    totalItems: filteredProducts.length
                   };
             let i = index
           "
@@ -69,7 +69,10 @@
             {{ product.price | currency : "₴" }}
           </th>
           <th>
-            <div class="products__wrapper-box-list-item-edit">
+            <div
+              class="products__wrapper-box-list-item-edit"
+              (click)="editProduct(product)"
+            >
               <svg
                 height="48"
                 viewBox="0 0 50 50"
@@ -82,11 +85,17 @@
                 <path d="M0 0h48v48h-48z" fill="none" />
               </svg>
             </div>
-            <div class="products__wrapper-box-list-item-delete">
+            <div
+              class="products__wrapper-box-list-item-delete"
+              (click)="deleteProduct(product.id)"
+            >
               <div class="close"></div>
             </div>
           </th>
         </tr>
+        <div class="not-found" *ngIf="filteredProducts.length === 0">
+          Not Found!
+        </div>
       </table>
 
       <pagination-controls
@@ -96,10 +105,6 @@
         (pageChange)="onPageChange($event)"
       >
       </pagination-controls>
-
-      <ng-template #notFound>
-        <div class="not-found">Not found!</div>
-      </ng-template>
     </div>
   </div>
 </div>

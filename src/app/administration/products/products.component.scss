@@ -54,6 +54,7 @@
           background-color: #f6f6f6;
           border-radius: 50%;
           border: 2px solid #232323;
+          cursor: pointer;
         }
       }
 
@@ -90,6 +91,7 @@
             background-color: #ffdf8c;
             margin-right: 16px;
             border: 1px solid #232323;
+            cursor: pointer;
           }
 
           &-delete {
@@ -100,6 +102,7 @@
             background-color: #ffdf8c;
             margin-right: 16px;
             border: 1px solid #232323;
+            cursor: pointer;
           }
 
           &-delete:before,
@@ -135,7 +138,7 @@
       }
 
       ::ng-deep .ngx-pagination .current {
-        background: #fe5f1e;
+        background: none;
       }
 
       ::ng-deep .ngx-pagination a {

@@ -2,9 +2,7 @@
 <div class="product">
   <p class="product__title">Products > {{ product?.name }}</p>
   <u class="product__name">{{ product?.name }}</u>
-  <p class="product__description">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo, laboriosam!
-  </p>
+  <p class="product__description">{{ product?.description }}</p>
   <p class="product__price">{{ product?.price | currency : "₴ " }}</p>
   <button (click)="addToCart(product!)" class="product__button">
     Add to cart

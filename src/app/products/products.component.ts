@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadingSvc.showLoader();
 
-    this.svc.data.subscribe((res) => {
+    this.svc.getAll().subscribe((res) => {
       this.products = res;
 
       this.loadingSvc.hideLoader();

@@ -25,7 +25,7 @@ export class CartComponent implements OnInit, OnDestroy {
     });
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     this.cartService.removeItem(id);
   }
 

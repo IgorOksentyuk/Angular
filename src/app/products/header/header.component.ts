@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     this.cartService.removeItem(id);
   }
 

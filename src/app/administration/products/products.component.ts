@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 import { IData } from 'src/app/models/product.model';
 import { FilterConfiguration } from './filter/models/filter.model';
 import { TypeOfFilterPrice } from '../products/filter/models/filter.model';
+import { ModalComponent } from '../modal/modal.component';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-products',
@@ -14,17 +19,19 @@ import { TypeOfFilterPrice } from '../products/filter/models/filter.model';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  public products: IData[] = [];
-  loading$ = this.loadingSvc._loading$;
+  products: IData[] = [];
   filteredProducts: IData[] = [];
+  loading$ = this.loadingSvc._loading$;
   currentSort: Sort;
   page: number = 1;
-  productsCount: number = 0;
   displayedProducts: number = 5;
 
   constructor(
     private productsService: ProductsService,
-    private loadingSvc: LoadingService
+    private loadingSvc: LoadingService,
+    private modalService: ModalService,
+
+    private dialogRef: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +40,7 @@ export class ProductsComponent implements OnInit {
   }
 
   postProducts() {
-    this.productsService.data.subscribe((res) => {
+    this.productsService.getAll().subscribe((res) => {
       this.products = res;
       this.filteredProducts = res;
 
@@ -97,7 +104,65 @@ export class ProductsComponent implements OnInit {
 
   onPageChange(event: any) {
     this.page = event;
-    this.postProducts();
+  }
+
+  addProduct() {
+    this.dialogRef
+      .open(ModalComponent, { width: '570px', height: '547px' })
+      .afterClosed()
+      .subscribe((newProduct) => {
+        if (newProduct) {
+          if (newProduct.name !== '') {
+            this.productsService.create(newProduct).subscribe((res) => {
+              if (res) {
+                location.reload();
+              }
+            });
+          } else {
+            console.error('Fill all fields!');
+          }
+        }
+      });
+  }
+
+  deleteProduct(id: string) {
+    this.dialogRef
+      .open(DeleteModalComponent, { width: '570px', height: '413px' })
+      .afterClosed()
+      .subscribe(() => {
+        console.log(id);
+        if (id) {
+          this.productsService.delete(id).subscribe((res) => {
+            if (res) {
+              location.reload();
+            }
+          });
+        }
+      });
+  }
+
+  editProduct(product: IData) {
+    this.dialogRef
+      .open(EditModalComponent, {
+        width: '570px',
+        height: '547px',
+        data: {
+          productPrice: product.price,
+          productName: product.name,
+          productId: product.id,
+          productDescription: product.description,
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.productsService.update(res).subscribe((res) => {
+            if (res) {
+              location.reload();
+            }
+          });
+        }
+      });
   }
 }
 
