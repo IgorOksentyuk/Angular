@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { IData } from '../models/product.model';
 import { LoadingService } from '../services/loading.service';
@@ -13,6 +14,7 @@ export class ProductsComponent implements OnInit {
   @Output()
   public products: IData[];
   loading$ = this.loadingSvc._loading$;
+  subscription: Subscription;
 
   constructor(
     private svc: ProductsService,
@@ -27,5 +29,11 @@ export class ProductsComponent implements OnInit {
 
       this.loadingSvc.hideLoader();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

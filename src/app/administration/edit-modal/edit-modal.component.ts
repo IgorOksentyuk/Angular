@@ -8,11 +8,10 @@ import {
   Inject,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 import { ModalService } from 'src/app/services/modal.service';
-import { ProductsService } from 'src/app/services/products.service';
 import { ProductConfiguration } from '../modal/models/ProductsConfiguration.model';
-import { IData } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-edit-modal',
@@ -24,6 +23,7 @@ export class EditModalComponent {
   productName: string = '';
   productPrice: number = 0;
   productDescription: string = '';
+  subscription: Subscription;
 
   @Output()
   productEditvent = new EventEmitter<ProductConfiguration>();
@@ -43,8 +43,6 @@ export class EditModalComponent {
     this.productId = data.productId;
     this.productDescription = data.productDescription;
   }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.inputName.nativeElement.value = this.productName;
@@ -76,10 +74,18 @@ export class EditModalComponent {
   }
 
   ok() {
-    this.modalService.configuration$.subscribe((productConfig) => {
-      this.productEditvent.emit(productConfig);
+    this.subscription = this.modalService.configuration$.subscribe(
+      (productConfig) => {
+        this.productEditvent.emit(productConfig);
 
-      this.dialogRef.close(productConfig);
-    });
+        this.dialogRef.close(productConfig);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

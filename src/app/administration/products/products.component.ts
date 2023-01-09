@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -25,6 +26,7 @@ export class ProductsComponent implements OnInit {
   currentSort: Sort;
   page: number = 1;
   displayedProducts: number = 5;
+  subscription: Subscription;
 
   constructor(
     private productsService: ProductsService,
@@ -40,7 +42,7 @@ export class ProductsComponent implements OnInit {
   }
 
   postProducts() {
-    this.productsService.getAll().subscribe((res) => {
+    this.subscription = this.productsService.getAll().subscribe((res) => {
       this.products = res;
       this.filteredProducts = res;
 
@@ -163,6 +165,12 @@ export class ProductsComponent implements OnInit {
           });
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
 
