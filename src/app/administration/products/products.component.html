@@ -1,64 +1,75 @@
 <div class="products">
   <app-navigation></app-navigation>
   <div class="products__wrapper">
-    <h1 class="products__title">Products</h1>
-    <div class="products__box">
-      <div class="products__box-row">
-        <input
-          class="products__box-row-input"
-          type="text"
-          placeholder="Search.."
-        />
-        <div class="products__box-row-select">
-          Price more than:
-          <div class="select-arrow"></div>
-        </div>
-        <div class="products__box-row-count">10</div>
-        <div class="products__box-row-apply">Apply</div>
-      </div>
-      <div class="products__box-categories">
-        <div class="products__box-categories-id">
-          ID
-          <div class="select-arrow"></div>
-        </div>
-        <div class="products__box-categories-name">
-          Name
-          <div class="select-arrow"></div>
-        </div>
-        <div class="products__box-categories-price">
-          Price
-          <div class="select-arrow"></div>
-        </div>
-        <div class="add-btn">
-          <svg
-            height="52px"
-            id="plus-icon"
-            style="enable-background: new 0 0 512 512"
-            version="1.1"
-            viewBox="0 0 512 512"
-            width="52px"
-            xml:space="preserve"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <g>
-              <path
-                d="M384,265H264v119h-17V265H128v-17h119V128h17v120h120V265z"
-              />
-            </g>
-          </svg>
-        </div>
-      </div>
+    <h1 class="products__wrapper-title">Products</h1>
+    <div class="products__wrapper-box">
+      <app-filter (filterChangeEvent)="onFilterChange($event)"></app-filter>
+
       <mat-spinner color="warn" *ngIf="loading$ | async"></mat-spinner>
-      <table class="products__box-list">
-        <tr *ngFor="let product of products" class="products__box-list-item">
-          <th class="products__box-list-item-id">{{ product.id }}</th>
-          <th class="products__box-list-item-name">{{ product.name }}</th>
-          <th class="products__box-list-item-price">
+      <table
+        matSort
+        (matSortChange)="sortData($event)"
+        class="products__wrapper-box-list"
+        *ngIf="filteredProducts.length; else notFound"
+      >
+        <tr class="products__wrapper-box-categories">
+          <th mat-sort-header="id" class="products__wrapper-box-categories-id">
+            ID
+          </th>
+          <th
+            mat-sort-header="name"
+            class="products__wrapper-box-categories-name"
+          >
+            Name
+          </th>
+          <th
+            mat-sort-header="price"
+            class="products__wrapper-box-categories-price"
+          >
+            Price
+          </th>
+          <th class="add-btn">
+            <svg
+              height="52px"
+              id="plus-icon"
+              style="enable-background: new 0 0 512 512"
+              version="1.1"
+              viewBox="0 0 512 512"
+              width="52px"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g>
+                <path
+                  d="M384,265H264v119h-17V265H128v-17h119V128h17v120h120V265z"
+                />
+              </g>
+            </svg>
+          </th>
+        </tr>
+        <tr
+          class="products__wrapper-box-list-item"
+          *ngFor="
+            let product of filteredProducts
+              | paginate
+                : {
+                    currentPage: page,
+                    itemsPerPage: displayedProducts,
+                    totalItems: productsCount
+                  };
+            let i = index
+          "
+        >
+          <th class="products__wrapper-box-list-item-id">{{ product.id }}</th>
+          <th class="products__wrapper-box-list-item-name">
+            {{ product.name }}
+          </th>
+          <th class="products__wrapper-box-list-item-price">
             {{ product.price | currency : "₴" }}
           </th>
           <th>
-            <div class="products__box-list-item-edit">
+            <div class="products__wrapper-box-list-item-edit">
               <svg
                 height="48"
                 viewBox="0 0 50 50"
@@ -71,12 +82,24 @@
                 <path d="M0 0h48v48h-48z" fill="none" />
               </svg>
             </div>
-            <div class="products__box-list-item-delete">
+            <div class="products__wrapper-box-list-item-delete">
               <div class="close"></div>
             </div>
           </th>
         </tr>
       </table>
+
+      <pagination-controls
+        class="page-controls"
+        previousLabel=" "
+        nextLabel=" "
+        (pageChange)="onPageChange($event)"
+      >
+      </pagination-controls>
+
+      <ng-template #notFound>
+        <div class="not-found">Not found!</div>
+      </ng-template>
     </div>
   </div>
 </div>
