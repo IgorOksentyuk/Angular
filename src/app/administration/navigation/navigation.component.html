@@ -13,7 +13,10 @@
       class="navigation__wrapper-item"
       >Products</a
     >
-    <a [routerLinkActive]="'active'" class="navigation__wrapper-item"
+    <a
+      (click)="signOut()"
+      [routerLinkActive]="'active'"
+      class="navigation__wrapper-item"
       >Log out</a
     >
   </div>
