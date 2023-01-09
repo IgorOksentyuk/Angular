@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 import { IData } from '../models/product.model';
 
@@ -9,8 +10,24 @@ import { IData } from '../models/product.model';
 })
 export class ProductsService {
   baseUrl: string = 'https://hys-fe-course-api.vercel.app/products';
+  private _editProductSubj = new Subject<IData>();
+  private _createProductSubj = new Subject<IData>();
 
   constructor(private http: HttpClient) {}
+
+  newEditEvent(event: IData) {
+    this._editProductSubj.next(event);
+  }
+  newCreateEvent(event: IData) {
+    this._createProductSubj.next(event);
+  }
+
+  get editEvents$() {
+    return this._editProductSubj.asObservable();
+  }
+  get createEvents$() {
+    return this._createProductSubj.asObservable();
+  }
 
   getAll(): Observable<IData[]> {
     return this.http.get(this.baseUrl) as Observable<IData[]>;
@@ -21,45 +38,25 @@ export class ProductsService {
   }
 
   create(product: IData): Observable<IData> {
-    return this.http.post(
-      this.baseUrl,
-      {
-        name: product.name,
-        price: Number(product.price),
-        description: product.description,
-      },
-      {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5Njg3N2NiNy0zZmVlLTRhN2UtODAwMC1mZWQ1YjkzZDAxNWIiLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmIkMTAkbEV2VEVEMFVHdk9GQWpJVmpLQnBBZWtqTVFrY0tFcXlNSUhKVEVyNVo1LmJjblRoaHlwQW0iLCJjcmVhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJ1cGRhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJpYXQiOjE2NzMyMDYwNjIsImV4cCI6MTY3MzI5MjQ2Mn0.q0mrd4PW5aCVmGbI8IV8Od63Sh43HHF4-4njpe9hdkI',
-        },
-      }
-    ) as Observable<IData>;
-  }
-
-  delete(productId: string): Observable<IData> {
-    return this.http.delete(this.baseUrl + '/' + productId, {
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5Njg3N2NiNy0zZmVlLTRhN2UtODAwMC1mZWQ1YjkzZDAxNWIiLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmIkMTAkbEV2VEVEMFVHdk9GQWpJVmpLQnBBZWtqTVFrY0tFcXlNSUhKVEVyNVo1LmJjblRoaHlwQW0iLCJjcmVhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJ1cGRhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJpYXQiOjE2NzMyMDYwNjIsImV4cCI6MTY3MzI5MjQ2Mn0.q0mrd4PW5aCVmGbI8IV8Od63Sh43HHF4-4njpe9hdkI',
-      },
+    return this.http.post(this.baseUrl, {
+      name: product.name,
+      price: Number(product.price),
+      description: product.description,
     }) as Observable<IData>;
   }
 
-  update(product: IData): Observable<IData> {
-    return this.http.put(
-      this.baseUrl + '/' + product.id,
-      {
-        name: product.name,
-        price: Number(product.price),
-        description: product.description,
-      },
-      {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI5Njg3N2NiNy0zZmVlLTRhN2UtODAwMC1mZWQ1YjkzZDAxNWIiLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmIkMTAkbEV2VEVEMFVHdk9GQWpJVmpLQnBBZWtqTVFrY0tFcXlNSUhKVEVyNVo1LmJjblRoaHlwQW0iLCJjcmVhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJ1cGRhdGVkQXQiOiIyMDIzLTAxLTA3VDIxOjE5OjQ0LjU3M1oiLCJpYXQiOjE2NzMyMDYwNjIsImV4cCI6MTY3MzI5MjQ2Mn0.q0mrd4PW5aCVmGbI8IV8Od63Sh43HHF4-4njpe9hdkI',
-        },
-      }
+  delete(productId: string): Observable<IData> {
+    return this.http.delete(
+      this.baseUrl + '/' + productId,
+      {}
     ) as Observable<IData>;
+  }
+
+  update(product: IData): Observable<IData> {
+    return this.http.put(this.baseUrl + '/' + product.id, {
+      name: product.name,
+      price: Number(product.price),
+      description: product.description,
+    }) as Observable<IData>;
   }
 }
