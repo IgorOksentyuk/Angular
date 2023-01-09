@@ -39,6 +39,22 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.loadingSvc.showLoader();
     this.postProducts();
+
+    this.productsService.editEvents$.subscribe((product) => {
+      let index = this.products.findIndex((el) => el.id === product.id);
+      if (index !== -1) {
+        this.products[index] = product;
+      }
+      index = this.filteredProducts.findIndex((el) => el.id === product.id);
+      if (index !== -1) {
+        this.filteredProducts[index] = product;
+      }
+    });
+
+    this.productsService.createEvents$.subscribe((product) => {
+      this.products.push(product);
+      this.filteredProducts.push(product);
+    });
   }
 
   postProducts() {
@@ -109,34 +125,25 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.dialogRef
-      .open(ModalComponent, { width: '570px', height: '547px' })
-      .afterClosed()
-      .subscribe((newProduct) => {
-        if (newProduct) {
-          if (newProduct.name !== '') {
-            this.productsService.create(newProduct).subscribe((res) => {
-              if (res) {
-                location.reload();
-              }
-            });
-          } else {
-            console.error('Fill all fields!');
-          }
-        }
-      });
+    this.dialogRef.open(ModalComponent, { width: '570px', height: '547px' });
   }
 
   deleteProduct(id: string) {
     this.dialogRef
       .open(DeleteModalComponent, { width: '570px', height: '413px' })
       .afterClosed()
-      .subscribe(() => {
-        console.log(id);
-        if (id) {
+      .subscribe((res) => {
+        if (res) {
           this.productsService.delete(id).subscribe((res) => {
             if (res) {
-              location.reload();
+              let index = this.products.findIndex((el) => el.id === id);
+              if (index !== -1) {
+                this.products.splice(index, 1);
+              }
+              index = this.filteredProducts.findIndex((el) => el.id === id);
+              if (index !== -1) {
+                this.filteredProducts.splice(index, 1);
+              }
             }
           });
         }
@@ -144,27 +151,16 @@ export class ProductsComponent implements OnInit {
   }
 
   editProduct(product: IData) {
-    this.dialogRef
-      .open(EditModalComponent, {
-        width: '570px',
-        height: '547px',
-        data: {
-          productPrice: product.price,
-          productName: product.name,
-          productId: product.id,
-          productDescription: product.description,
-        },
-      })
-      .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this.productsService.update(res).subscribe((res) => {
-            if (res) {
-              location.reload();
-            }
-          });
-        }
-      });
+    this.dialogRef.open(EditModalComponent, {
+      width: '570px',
+      height: '547px',
+      data: {
+        productPrice: product.price,
+        productName: product.name,
+        productId: product.id,
+        productDescription: product.description,
+      },
+    });
   }
 
   ngOnDestroy(): void {
