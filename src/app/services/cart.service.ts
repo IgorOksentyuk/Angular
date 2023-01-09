@@ -37,7 +37,7 @@ export class CartService {
     return Number(total.toFixed(2));
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     let index = this.items.findIndex((el) => el.id === id);
     if (index !== -1) {
       this.items.splice(index, 1);
