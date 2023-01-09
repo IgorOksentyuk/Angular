@@ -9,8 +9,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DeleteModalComponent {
   constructor(private dialogRef: MatDialogRef<DeleteModalComponent>) {}
 
-  ngOnInit(): void {}
-
   cancel() {
     this.dialogRef.close(false);
   }
