@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService as AuthGuard } from './login/services/auth-guard.service';
+
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
@@ -14,6 +16,12 @@ const routes: Routes = [
       import('../app/administration/administration.module').then(
         (m) => m.AdministrationModule
       ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('../app/login/login.module').then((m) => m.LoginModule),
   },
   { path: '**', component: NotFoundComponent },
 ];

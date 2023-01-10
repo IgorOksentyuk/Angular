@@ -40,6 +40,8 @@
         </svg>
         ({{ getCount() }})
       </a>
+
+      <a [routerLink]="'/login'" class="header__wrapper-list-item">Log in</a>
     </div>
   </div>
   <div *ngIf="visibleTool && items.length >= 1" class="tooltip">

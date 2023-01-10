@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IData } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -11,6 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: IData | undefined;
+  subscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,5 +38,11 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(product: IData) {
     this.cartService.addToCart(product);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

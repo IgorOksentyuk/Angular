@@ -28,6 +28,10 @@
     />
   </mat-form-field>
 </div>
+<div class="errors">
+  <div *ngFor="let error of errors">{{ error }}</div>
+</div>
+
 <div mat-dialog-actions class="buttons">
   <button mat-raised-button color="warn" class="buttons__btn" (click)="close()">
     Cancel

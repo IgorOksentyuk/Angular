@@ -8,11 +8,12 @@ import {
   Inject,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { IData } from 'src/app/models/product.model';
 
 import { ModalService } from 'src/app/services/modal.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProductConfiguration } from '../modal/models/ProductsConfiguration.model';
-import { IData } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-edit-modal',
@@ -20,10 +21,13 @@ import { IData } from 'src/app/models/product.model';
   styleUrls: ['../modal/modal.component.scss'],
 })
 export class EditModalComponent {
+  product: IData;
   productId: string;
   productName: string = '';
   productPrice: number = 0;
   productDescription: string = '';
+  subscription: Subscription;
+  errors: string[];
 
   @Output()
   productEditvent = new EventEmitter<ProductConfiguration>();
@@ -36,15 +40,14 @@ export class EditModalComponent {
   constructor(
     private dialogRef: MatDialogRef<EditModalComponent>,
     private modalService: ModalService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private productsService: ProductsService
   ) {
     this.productName = data.productName;
     this.productPrice = data.productPrice;
     this.productId = data.productId;
     this.productDescription = data.productDescription;
   }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.inputName.nativeElement.value = this.productName;
@@ -76,10 +79,24 @@ export class EditModalComponent {
   }
 
   ok() {
-    this.modalService.configuration$.subscribe((productConfig) => {
-      this.productEditvent.emit(productConfig);
+    this.subscription = this.modalService.configuration$.subscribe(
+      (productConfig) => {
+        this.productsService.update(productConfig).subscribe(
+          (res) => {
+            this.productsService.newEditEvent(productConfig);
+            this.dialogRef.close();
+          },
+          (badResponse) => {
+            this.errors = badResponse.error.message;
+          }
+        );
+      }
+    );
+  }
 
-      this.dialogRef.close(productConfig);
-    });
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
