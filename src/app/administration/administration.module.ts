@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { ProductsModule } from './products/products.module';
-import { UsersModule } from './users/users.module';
 import { NavigationModule } from './navigation/navigation.module';
 
 import { AdministrationComponent } from './administration.component';
@@ -18,12 +17,16 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @NgModule({
-  declarations: [AdministrationComponent, ModalComponent, DeleteModalComponent, EditModalComponent],
+  declarations: [
+    AdministrationComponent,
+    ModalComponent,
+    DeleteModalComponent,
+    EditModalComponent,
+  ],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
     ProductsModule,
-    UsersModule,
     NavigationModule,
     MatDialogModule,
     MatFormFieldModule,
