@@ -12,7 +12,8 @@ import { ProductsService } from '../services/products.service';
 })
 export class ProductsComponent implements OnInit {
   @Output()
-  public products: IData[];
+  products: IData[];
+  displayedProducts: IData[];
   loading$ = this.loadingSvc._loading$;
   subscription: Subscription;
 
@@ -26,9 +27,18 @@ export class ProductsComponent implements OnInit {
 
     this.svc.getAll().subscribe((res) => {
       this.products = res;
+      this.displayedProducts = res.slice(0, 8);
 
       this.loadingSvc.hideLoader();
     });
+  }
+
+  showMore() {
+    let newLength = this.displayedProducts.length + 4;
+    if (newLength > this.products.length) {
+      newLength = this.products.length;
+    }
+    this.displayedProducts = this.products.slice(0, newLength);
   }
 
   ngOnDestroy(): void {
