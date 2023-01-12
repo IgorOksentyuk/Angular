@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 
 import { TokenStorageService } from './services/token-storage.service';
+import { LoginForm } from './models/login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { TokenStorageService } from './services/token-storage.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  form: any = {
+  form: LoginForm = {
     username: null,
     password: null,
   };
@@ -18,6 +19,10 @@ export class LoginComponent {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  errors: string[] = [
+    'Password is required',
+    'Password must be at least 6 characters',
+  ];
 
   constructor(
     private authService: AuthService,
@@ -34,7 +39,7 @@ export class LoginComponent {
   onSubmit(): void {
     const { username, password } = this.form;
 
-    this.authService.login(username, password).subscribe(
+    this.authService.login(username!, password!).subscribe(
       (data) => {
         this.tokenStorage.saveToken(data.access_token);
 
