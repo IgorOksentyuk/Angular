@@ -8,7 +8,7 @@ import {
   Inject,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { mergeMap, Subscription, of } from 'rxjs';
 import { IData } from 'src/app/models/product.model';
 
 import { ModalService } from 'src/app/services/modal.service';
@@ -79,19 +79,28 @@ export class EditModalComponent {
   }
 
   ok() {
-    this.subscription = this.modalService.configuration$.subscribe(
-      (productConfig) => {
-        this.productsService.update(productConfig).subscribe(
-          (res) => {
-            this.productsService.newEditEvent(productConfig);
-            this.dialogRef.close();
-          },
-          (badResponse) => {
-            this.errors = badResponse.error.message;
+    this.subscription = this.modalService.configuration$
+      .pipe(
+        mergeMap((productConfig) => {
+          if (productConfig) {
+            return this.productsService.update(productConfig);
           }
-        );
-      }
-    );
+
+          return of(null);
+        })
+      )
+      .subscribe(
+        (productConfig) => {
+          this.productsService.newEditEvent(productConfig!);
+          this.dialogRef.close();
+        },
+        (badResponse) => {
+          this.errors = badResponse.error.message;
+          this.errors = Array.isArray(this.errors)
+            ? this.errors
+            : [this.errors];
+        }
+      );
   }
 
   ngOnDestroy(): void {
