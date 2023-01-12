@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { mergeMap, Subscription, of } from 'rxjs';
 
 import { LoadingService } from 'src/app/services/loading.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { ModalService } from 'src/app/services/modal.service';
 
 import { IData } from 'src/app/models/product.model';
 import { FilterConfiguration } from './filter/models/filter.model';
@@ -31,7 +30,6 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private loadingSvc: LoadingService,
-    private modalService: ModalService,
 
     private dialogRef: MatDialog
   ) {}
@@ -132,20 +130,25 @@ export class ProductsComponent implements OnInit {
     this.dialogRef
       .open(DeleteModalComponent, { width: '570px', height: '413px' })
       .afterClosed()
+      .pipe(
+        mergeMap((res: Boolean) => {
+          if (res) {
+            return this.productsService.delete(id);
+          }
+          return of(null);
+        })
+      )
+
       .subscribe((res) => {
         if (res) {
-          this.productsService.delete(id).subscribe((res) => {
-            if (res) {
-              let index = this.products.findIndex((el) => el.id === id);
-              if (index !== -1) {
-                this.products.splice(index, 1);
-              }
-              index = this.filteredProducts.findIndex((el) => el.id === id);
-              if (index !== -1) {
-                this.filteredProducts.splice(index, 1);
-              }
-            }
-          });
+          let index = this.products.findIndex((el) => el.id === id);
+          if (index !== -1) {
+            this.products.splice(index, 1);
+          }
+          index = this.filteredProducts.findIndex((el) => el.id === id);
+          if (index !== -1) {
+            this.filteredProducts.splice(index, 1);
+          }
         }
       });
   }
