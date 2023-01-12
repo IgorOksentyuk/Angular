@@ -1,5 +1,5 @@
-import { Component, Inject, Output, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Inject } from '@angular/core';
+import { mergeMap, Subscription, of } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ModalService } from 'src/app/services/modal.service';
@@ -40,19 +40,28 @@ export class ModalComponent {
   }
 
   ok() {
-    this.subscription = this.modalService.configuration$.subscribe(
-      (productConfig) => {
-        this.productsService.create(productConfig).subscribe(
-          () => {
-            this.productsService.newCreateEvent(productConfig);
-            this.dialogRef.close();
-          },
-          (badResponse) => {
-            this.errors = badResponse.error.message;
+    this.modalService.configuration$
+      .pipe(
+        mergeMap((productConfig) => {
+          if (productConfig) {
+            return this.productsService.create(productConfig);
           }
-        );
-      }
-    );
+          return of(null);
+        })
+      )
+      .subscribe(
+        (productConfig) => {
+          this.productsService.newCreateEvent(productConfig!);
+          this.dialogRef.close();
+          location.reload();
+        },
+        (badResponse) => {
+          this.errors = badResponse.error.message;
+          this.errors = Array.isArray(this.errors)
+            ? this.errors
+            : [this.errors];
+        }
+      );
   }
 
   ngOnDestroy(): void {
