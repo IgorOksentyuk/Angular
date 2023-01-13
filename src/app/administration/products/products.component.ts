@@ -123,7 +123,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.dialogRef.open(ModalComponent, { width: '570px', height: '547px' });
+    this.dialogRef.open(ModalComponent, { width: '570px' });
   }
 
   deleteProduct(id: string) {
