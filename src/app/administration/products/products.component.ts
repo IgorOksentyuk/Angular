@@ -156,7 +156,7 @@ export class ProductsComponent implements OnInit {
   editProduct(product: IData) {
     this.dialogRef.open(EditModalComponent, {
       width: '570px',
-      height: '547px',
+
       data: {
         productPrice: product.price,
         productName: product.name,
