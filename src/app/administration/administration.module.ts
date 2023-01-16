@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { ProductsModule } from './products/products.module';
@@ -33,6 +34,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
     FormsModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule,
   ],
   exports: [AdministrationComponent],
 })
