@@ -1,19 +1,16 @@
 import {
   Component,
-  Output,
-  EventEmitter,
   ViewChild,
   ElementRef,
   Optional,
   Inject,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { mergeMap, Subscription, of } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+
 import { IData } from 'src/app/models/product.model';
 
-import { ModalService } from 'src/app/services/modal.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { ProductConfiguration } from '../modal/models/ProductsConfiguration.model';
 
 @Component({
   selector: 'app-edit-modal',
@@ -26,11 +23,8 @@ export class EditModalComponent {
   productName: string = '';
   productPrice: number = 0;
   productDescription: string = '';
-  subscription: Subscription;
   errors: string[];
-
-  @Output()
-  productEditvent = new EventEmitter<ProductConfiguration>();
+  reactiveForm: FormGroup;
 
   @ViewChild('productname') inputName: ElementRef<HTMLInputElement>;
   @ViewChild('productprice') inputPrice: ElementRef<HTMLInputElement>;
@@ -39,7 +33,6 @@ export class EditModalComponent {
 
   constructor(
     private dialogRef: MatDialogRef<EditModalComponent>,
-    private modalService: ModalService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private productsService: ProductsService
   ) {
@@ -49,29 +42,26 @@ export class EditModalComponent {
     this.productDescription = data.productDescription;
   }
 
+  ngOnInit(): void {
+    this.reactiveForm = new FormGroup({
+      name: new FormControl(''),
+      price: new FormControl(null),
+      description: new FormControl(''),
+      id: new FormControl(''),
+    });
+  }
+
   ngAfterViewInit() {
     this.inputName.nativeElement.value = this.productName;
-    this.modalService.setName(this.productName);
+    this.reactiveForm.controls['name'].setValue(this.productName);
 
     this.inputPrice.nativeElement.value = String(this.productPrice);
-    this.modalService.setPrice(this.productPrice);
+    this.reactiveForm.controls['price'].setValue(this.productPrice);
 
     this.inputDescription.nativeElement.value = String(this.productDescription);
-    this.modalService.setDescription(this.productDescription);
+    this.reactiveForm.controls['description'].setValue(this.productDescription);
 
-    this.modalService.setId(this.productId);
-  }
-
-  setName(event: any): void {
-    this.modalService.setName(event.target.value);
-  }
-
-  setPrice(event: any): void {
-    this.modalService.setPrice(event.target.value);
-  }
-
-  setDescription(event: any): void {
-    this.modalService.setDescription(event.target.value);
+    this.reactiveForm.controls['id'].setValue(this.productId);
   }
 
   close() {
@@ -79,33 +69,16 @@ export class EditModalComponent {
   }
 
   ok() {
-    this.subscription = this.modalService.configuration$
-      .pipe(
-        mergeMap((productConfig) => {
-          if (productConfig) {
-            return this.productsService.update(productConfig);
-          }
-
-          return of(null);
-        })
-      )
-      .subscribe(
-        (productConfig) => {
-          this.productsService.newEditEvent(productConfig!);
-          this.dialogRef.close();
-        },
-        (badResponse) => {
-          this.errors = badResponse.error.message;
-          this.errors = Array.isArray(this.errors)
-            ? this.errors
-            : [this.errors];
-        }
-      );
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    const values = this.reactiveForm.getRawValue();
+    this.productsService.update(values).subscribe(
+      (values) => {
+        this.productsService.newEditEvent(values);
+        this.dialogRef.close();
+      },
+      (badResponse) => {
+        this.errors = badResponse.error.message;
+        this.errors = Array.isArray(this.errors) ? this.errors : [this.errors];
+      }
+    );
   }
 }
