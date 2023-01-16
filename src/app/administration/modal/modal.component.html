@@ -1,12 +1,12 @@
 <h1 mat-dialog-title class="title">Add Product</h1>
-<div mat-dialog-content class="dialog">
+<form [formGroup]="reactiveForm" mat-dialog-content class="dialog">
   <mat-form-field appearance="fill" class="dialog__field">
     <p class="dialog__field-label">Name:</p>
     <input
       type="text"
       matInput
       class="dialog__field-input"
-      (input)="setName($event)"
+      formControlName="name"
     />
   </mat-form-field>
   <mat-form-field appearance="fill" class="dialog__field">
@@ -15,7 +15,7 @@
       type="number"
       matInput
       class="dialog__field-input"
-      (input)="setPrice($event)"
+      formControlName="price"
     />
   </mat-form-field>
   <mat-form-field appearance="fill" class="dialog__field">
@@ -24,10 +24,10 @@
       type="text"
       matInput
       class="dialog__field-input"
-      (input)="setDescription($event)"
+      formControlName="description"
     />
   </mat-form-field>
-</div>
+</form>
 <div class="errors">
   <div *ngFor="let error of errors">- {{ error }}</div>
 </div>
@@ -37,7 +37,13 @@
     Cancel
   </button>
 
-  <button mat-raised-button color="primary" class="buttons__btn" (click)="ok()">
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    class="buttons__btn"
+    (click)="ok()"
+  >
     Ok
   </button>
 </div>
