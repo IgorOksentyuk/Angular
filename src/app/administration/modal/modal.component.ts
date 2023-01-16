@@ -1,8 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { mergeMap, Subscription, of } from 'rxjs';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { ModalService } from 'src/app/services/modal.service';
 import { IData } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -13,26 +12,20 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ModalComponent {
   products: IData[] = [];
-  subscription: Subscription;
   errors: string[];
+  reactiveForm: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private modalService: ModalService,
     private dialogRef: MatDialogRef<ModalComponent>,
     private productsService: ProductsService
   ) {}
 
-  setName(event: any): void {
-    this.modalService.setName(event.target.value);
-  }
-
-  setPrice(event: any): void {
-    this.modalService.setPrice(event.target.value);
-  }
-
-  setDescription(event: any): void {
-    this.modalService.setDescription(event.target.value);
+  ngOnInit(): void {
+    this.reactiveForm = new FormGroup({
+      name: new FormControl(''),
+      price: new FormControl(null),
+      description: new FormControl(''),
+    });
   }
 
   close() {
@@ -40,33 +33,16 @@ export class ModalComponent {
   }
 
   ok() {
-    this.modalService.configuration$
-      .pipe(
-        mergeMap((productConfig) => {
-          if (productConfig) {
-            return this.productsService.create(productConfig);
-          }
-          return of(null);
-        })
-      )
-      .subscribe(
-        (productConfig) => {
-          this.productsService.newCreateEvent(productConfig!);
-          this.dialogRef.close();
-          location.reload();
-        },
-        (badResponse) => {
-          this.errors = badResponse.error.message;
-          this.errors = Array.isArray(this.errors)
-            ? this.errors
-            : [this.errors];
-        }
-      );
-  }
+    const values = this.reactiveForm.getRawValue();
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.productsService.create(values).subscribe(() => {
+      this.productsService.newCreateEvent(values);
+      this.dialogRef.close();
+      location.reload();
+    }),
+      (badResponse: any) => {
+        this.errors = badResponse.error.message;
+        this.errors = Array.isArray(this.errors) ? this.errors : [this.errors];
+      };
   }
 }
