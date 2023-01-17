@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
 import { NavigationModule } from './navigation/navigation.module';
 
 import { AdministrationComponent } from './administration.component';
@@ -28,6 +29,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
     CommonModule,
     AdministrationRoutingModule,
     ProductsModule,
+    UsersModule,
     NavigationModule,
     MatDialogModule,
     MatFormFieldModule,
