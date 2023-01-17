@@ -5,12 +5,17 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'products',
+    redirectTo: 'users',
   },
   {
     path: 'products',
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
+  },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
   },
 ];
 
