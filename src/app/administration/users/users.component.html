@@ -1,0 +1,104 @@
+<div class="users">
+  <app-navigation></app-navigation>
+  <div class="users__wrapper">
+    <h1 class="users__wrapper-title">Users</h1>
+    <div class="users__wrapper-box">
+      <app-filter (filterChangeEvent)="onFilterChange($event)"></app-filter>
+
+      <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+      <table
+        matSort
+        (matSortChange)="sortData($event)"
+        class="users__wrapper-box-list"
+      >
+        <tr class="users__wrapper-box-categories">
+          <th mat-sort-header="id" class="users__wrapper-box-categories-id">
+            ID
+          </th>
+          <th
+            mat-sort-header="username"
+            class="users__wrapper-box-categories-name"
+          >
+            Name
+          </th>
+          <th
+            mat-sort-header="createdAt"
+            class="users__wrapper-box-categories-price"
+          >
+            Created
+          </th>
+          <th class="add-btn">
+            <svg
+              height="52px"
+              id="plus-icon"
+              style="enable-background: new 0 0 512 512"
+              version="1.1"
+              viewBox="0 0 512 512"
+              width="52px"
+              xml:space="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g>
+                <path
+                  d="M384,265H264v119h-17V265H128v-17h119V128h17v120h120V265z"
+                />
+              </g>
+            </svg>
+          </th>
+        </tr>
+
+        <tr
+          class="users__wrapper-box-list-item"
+          *ngFor="
+            let user of filteredUsers
+              | paginate
+                : {
+                    currentPage: page,
+                    itemsPerPage: displayedUsers,
+                    totalItems: filteredUsers.length
+                  };
+            let i = index
+          "
+        >
+          <th class="users__wrapper-box-list-item-id">{{ user.id }}</th>
+          <th class="users__wrapper-box-list-item-name">
+            {{ user.username }}
+          </th>
+          <th class="users__wrapper-box-list-item-date">
+            {{ user.createdAt.slice(0, 10) }}
+          </th>
+          <th>
+            <div class="users__wrapper-box-list-item-edit">
+              <svg
+                height="48"
+                viewBox="0 0 50 50"
+                width="38"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 34.5v7.5h7.5l22.13-22.13-7.5-7.5-22.13 22.13zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z"
+                />
+                <path d="M0 0h48v48h-48z" fill="none" />
+              </svg>
+            </div>
+            <div class="users__wrapper-box-list-item-delete">
+              <div class="close"></div>
+            </div>
+          </th>
+        </tr>
+        <div class="not-found" *ngIf="filteredUsers.length === 0">
+          Not Found!
+        </div>
+      </table>
+
+      <pagination-controls
+        class="page-controls"
+        previousLabel=" "
+        nextLabel=" "
+        (pageChange)="onPageChange($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</div>
