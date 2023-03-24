@@ -10,6 +10,8 @@ import {
   FilterUserConfiguration,
   TypeOfFilterDate,
 } from './models/filter.model';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -27,12 +29,18 @@ export class UsersComponent {
 
   constructor(
     private loadingSvc: LoadingService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private dialogRef: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.loadingSvc.showLoader();
     this.postUsers();
+
+    this.usersService.createEvents$.subscribe((user) => {
+      this.users.push(user);
+      this.filteredUsers.push(user);
+    });
   }
 
   postUsers() {
@@ -100,6 +108,10 @@ export class UsersComponent {
           return 0;
       }
     });
+  }
+
+  addUser() {
+    this.dialogRef.open(CreateUserComponent, { width: '570px' });
   }
 }
 
