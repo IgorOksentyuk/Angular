@@ -1,11 +1,9 @@
-import { Component, Inject, Output, EventEmitter } from '@angular/core';
-import { debounceTime, Subscription } from 'rxjs';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { ModalService } from 'src/app/services/modal.service';
-import { ProductsService } from 'src/app/services/products.service';
-import { ProductConfiguration } from './models/ProductsConfiguration.model';
 import { IData } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-modal',
@@ -14,29 +12,20 @@ import { IData } from 'src/app/models/product.model';
 })
 export class ModalComponent {
   products: IData[] = [];
-  productId: string;
-  subscription: Subscription;
-
-  @Output()
-  productAddEvent = new EventEmitter<ProductConfiguration>();
+  errors: string[];
+  reactiveForm: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private modalService: ModalService,
-    private productsService: ProductsService,
-    private dialogRef: MatDialogRef<ModalComponent>
+    private dialogRef: MatDialogRef<ModalComponent>,
+    private productsService: ProductsService
   ) {}
 
-  setName(event: any): void {
-    this.modalService.setName(event.target.value);
-  }
-
-  setPrice(event: any): void {
-    this.modalService.setPrice(event.target.value);
-  }
-
-  setDescription(event: any): void {
-    this.modalService.setDescription(event.target.value);
+  ngOnInit(): void {
+    this.reactiveForm = new FormGroup({
+      name: new FormControl(''),
+      price: new FormControl(null),
+      description: new FormControl(''),
+    });
   }
 
   close() {
@@ -44,11 +33,16 @@ export class ModalComponent {
   }
 
   ok() {
-    this.modalService.configuration$.subscribe((productConfig) => {
-      productConfig.id = this.productId;
-      this.productAddEvent.emit(productConfig);
+    const values = this.reactiveForm.getRawValue();
 
-      this.dialogRef.close(productConfig);
-    });
+    this.productsService.create(values).subscribe(() => {
+      this.productsService.newCreateEvent(values);
+      this.dialogRef.close();
+      location.reload();
+    }),
+      (badResponse: any) => {
+        this.errors = badResponse.error.message;
+        this.errors = Array.isArray(this.errors) ? this.errors : [this.errors];
+      };
   }
 }

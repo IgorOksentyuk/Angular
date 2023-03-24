@@ -1,4 +1,5 @@
 .products__wrapper-item {
+  line-height: 43.57px;
   display: flex;
   flex-direction: column;
   width: 402px;
@@ -24,6 +25,10 @@
       &-item {
         width: 302px;
         height: 221px;
+
+        &-price {
+          margin-bottom: 14px;
+        }
       }
     }
   }

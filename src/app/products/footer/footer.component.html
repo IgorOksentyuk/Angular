@@ -1,5 +1,9 @@
 <footer class="footer">
-  <button [routerLink]="'/administration/users'" class="footer__btn right">
+  <button
+    *ngIf="isLoggedIn"
+    [routerLink]="'/administration'"
+    class="footer__btn right"
+  >
     Admin ->
   </button>
 </footer>

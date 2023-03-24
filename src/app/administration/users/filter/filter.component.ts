@@ -4,9 +4,9 @@ import { debounceTime, Subscription } from 'rxjs';
 
 import { FilterService } from 'src/app/services/filter.service';
 import {
-  FilterConfiguration,
-  TypeOfFilterPrice,
-} from '../../products/filter/models/filter.model';
+  FilterUserConfiguration,
+  TypeOfFilterDate,
+} from '../models/filter.model';
 
 @Component({
   selector: 'app-filter',
@@ -14,34 +14,33 @@ import {
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
-  visibleTool: boolean = false;
-  priceMore = TypeOfFilterPrice.More;
-  priceLess = TypeOfFilterPrice.Less;
+  dateMore = TypeOfFilterDate.More;
+  dateLess = TypeOfFilterDate.Less;
   subscription: Subscription;
 
   @Output()
-  filterChangeEvent = new EventEmitter<FilterConfiguration>();
+  filterChangeEvent = new EventEmitter<FilterUserConfiguration>();
 
   constructor(private filterService: FilterService) {}
 
   ngOnInit(): void {
-    this.subscription = this.filterService.configuration$
+    this.subscription = this.filterService.userConfiguration$
       .pipe(debounceTime(1000))
-      .subscribe((filterConfig) => {
-        this.filterChangeEvent.emit(filterConfig);
+      .subscribe((filterUserConfig) => {
+        this.filterChangeEvent.emit(filterUserConfig);
       });
   }
 
-  price(event: any): void {
-    this.filterService.setPrice(event.target.value);
+  date(event: any): void {
+    this.filterService.setDate(event.target.value);
   }
 
-  priceType(event: any): void {
-    this.filterService.setTypePrice(event.target.value);
+  dateType(event: any): void {
+    this.filterService.setTypeDate(event.target.value);
   }
 
   search(event: any): void {
-    this.filterService.setSearchValue(event.target.value);
+    this.filterService.setUserSearchValue(event.target.value);
   }
 
   ngOnDestroy(): void {

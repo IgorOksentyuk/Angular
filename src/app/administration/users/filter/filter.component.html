@@ -1,0 +1,23 @@
+<div class="users__box-row">
+  <input
+    class="users__box-row-input"
+    type="text"
+    placeholder="Search.."
+    (input)="search($event)"
+  />
+  <select
+    class="users__box-row-select"
+    name="select"
+    (change)="dateType($event)"
+  >
+    <option value="{{ dateMore }}">{{ dateMore }}</option>
+    <option value="{{ dateLess }}">{{ dateLess }}</option>
+  </select>
+
+  <input
+    value="2023-01-01"
+    type="text"
+    class="users__box-row-count"
+    (input)="date($event)"
+  />
+</div>
