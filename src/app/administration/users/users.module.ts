@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSortModule } from '@angular/material/sort';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { NavigationModule } from '../navigation/navigation.module';
 import { FilterComponent } from './filter/filter.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
-  declarations: [UsersComponent, FilterComponent],
+  declarations: [UsersComponent, FilterComponent, CreateUserComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -20,6 +22,8 @@ import { FilterComponent } from './filter/filter.component';
     FormsModule,
     MatSortModule,
     NgxPaginationModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
   ],
 })
 export class UsersModule {}
