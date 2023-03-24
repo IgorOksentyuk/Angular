@@ -5,8 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #232323;
-  background-color: #fe5f1e;
+  background-color: #259cbf;
   border-radius: 12px;
 
   &__wrapper {
@@ -26,25 +25,24 @@
       font-weight: 400;
       padding: 12px 95px 11px 58px;
       margin: 0;
-      color: #232323;
+      color: #f6f6f6;
       text-decoration: none;
+      transition: all 0.3s ease 0s;
       cursor: pointer;
     }
 
-    &-item:hover {
-      background-color: #ffdf8c;
-      border-radius: 12px;
-    }
-
+    &-item:hover,
     .active {
       background-color: #f6f6f6;
+      color: #232323;
+      border-radius: 8px;
     }
   }
 
   &__btn {
     align-items: flex-end;
     margin: 0 0 51px 54px;
-    color: #232323;
+    color: #f6f6f6;
 
     text-decoration: none;
     cursor: pointer;
