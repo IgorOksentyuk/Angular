@@ -1,11 +1,14 @@
 <app-header></app-header>
 <div class="product">
   <p class="product__title">Products > {{ product?.name }}</p>
-  <u class="product__name">{{ product?.name }}</u>
-  <p class="product__description">{{ product?.description }}</p>
-  <p class="product__price">{{ product?.price | currency : "₴ " }}</p>
-  <button (click)="addToCart(product!)" class="product__button">
-    Add to cart
-  </button>
+
+  <div class="product__wrapper">
+    <u class="product__wrapper-name">{{ product?.name }}</u>
+    <p class="product__wrapper-description">{{ product?.description }}</p>
+    <p class="product__wrapper-price">{{ product?.price | currency : "₴ " }}</p>
+    <button class="product__wrapper-button" (click)="addToCart(product!)">
+      Add to cart
+    </button>
+  </div>
 </div>
 <app-footer></app-footer>
