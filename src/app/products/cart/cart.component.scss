@@ -1,8 +1,10 @@
+@use "../../shared/variables.scss";
+
 .cart {
   height: calc(100vh - 210px);
   font-size: 48px;
   margin-left: 93px;
-  color: #f6f6f6;
+  color: variables.$mainWhite;
 
   &__title {
     margin: 28px 0 43px 0;
@@ -28,8 +30,8 @@
     min-height: 271px;
     margin: 0 39px 48px 0;
     border-radius: 20px;
-    background-color: #f6f6f6;
-    color: #232323;
+    background-color: variables.$mainWhite;
+    color: variables.$mainBlack;
 
     &-name {
       margin: 37px 0 25px 34px;
@@ -48,8 +50,8 @@
       padding: 15px 55px;
       border: none;
       border-radius: 24px;
-      color: #f6f6f6;
-      background-color: #2c3e50;
+      color: variables.$mainWhite;
+      background-color: variables.$backgroundGrey;
       cursor: pointer;
     }
   }
