@@ -12,15 +12,15 @@ export class ChangePriceColorDirective implements OnInit {
   }
   ngOnInit(): void {
     const color = {
-      yellow: '#b1d91a',
-      red: '#fe5f1e',
+      blue: '#259cbf',
+      black: '#232323',
     };
 
-    if (this.price > 100) {
-      this.element.nativeElement.style.color = color.yellow;
+    if (this.price > 1000) {
+      this.element.nativeElement.style.color = color.blue;
     }
-    if (this.price > 200) {
-      this.element.nativeElement.style.color = color.red;
+    if (this.price > 10000) {
+      this.element.nativeElement.style.color = color.black;
     }
   }
 }
