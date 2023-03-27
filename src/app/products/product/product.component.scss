@@ -1,3 +1,5 @@
+@use "../../shared/variables.scss";
+
 .products__wrapper-item {
   line-height: 43.57px;
   display: flex;
@@ -6,7 +8,8 @@
   min-height: 271px;
   margin: 0 39px 48px 0;
   border-radius: 20px;
-  background-color: #f6f6f6;
+  background-color: variables.$mainWhite;
+  color: variables.$mainRed;
 
   &-title {
     margin: 37px 0 25px 34px;

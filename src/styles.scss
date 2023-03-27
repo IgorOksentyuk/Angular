@@ -1,5 +1,8 @@
+@use "app/shared/variables.scss";
+
 body {
-  background-color: #259cbf;
+  background-color: variables.$backgroundBlue;
+  color: variables.$mainBlack;
 }
 
 html,
