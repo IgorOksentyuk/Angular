@@ -19,40 +19,41 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 59px 57px 97px;
-  }
 
-  &__item {
-    font-size: 36px;
-    line-height: 43.57px;
-    display: flex;
-    flex-direction: column;
-    width: 402px;
-    min-height: 271px;
-    margin: 0 39px 48px 0;
-    border-radius: 20px;
-    background-color: variables.$mainWhite;
-    color: variables.$mainBlack;
+    &-item {
+      font-size: 36px;
+      line-height: 43.57px;
+      width: 400px;
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin: 0 39px 48px 0;
+      border-radius: 20px;
+      background-color: variables.$mainWhite;
+      color: variables.$mainBlack;
 
-    &-name {
-      margin: 37px 0 25px 34px;
-    }
+      &-name {
+        margin: 37px 34px 0 34px;
+      }
 
-    &-price {
-      margin: 0 0 31px 34px;
-    }
+      &-price {
+        margin-left: 34px;
+      }
 
-    &-button {
-      font-size: 24px;
-      min-height: 60px;
-      width: 75%;
-      align-self: center;
-      margin: 0 30px 29px 30px;
-      padding: 15px 55px;
-      border: none;
-      border-radius: 24px;
-      color: variables.$mainWhite;
-      background-color: variables.$backgroundGrey;
-      cursor: pointer;
+      &-button {
+        font-size: 24px;
+        height: 60px;
+        width: 76%;
+        align-self: center;
+        margin: 0 0 30px 0;
+        padding: 15px 55px;
+        border: none;
+        border-radius: 24px;
+        color: variables.$mainWhite;
+        background-color: variables.$backgroundGrey;
+        cursor: pointer;
+      }
     }
   }
 }
