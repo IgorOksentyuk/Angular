@@ -1,5 +1,5 @@
 <app-header [ngClass]="{ transparent: isTransparent }"></app-header>
-<mat-spinner color="warn" *ngIf="loading$ | async"></mat-spinner>
+<mat-spinner *ngIf="loading$ | async"></mat-spinner>
 <div class="products">
   <div class="products__title">Products</div>
   <div class="products__wrapper">
