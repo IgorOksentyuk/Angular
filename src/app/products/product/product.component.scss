@@ -22,12 +22,16 @@
   }
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 610px) {
   .products {
     &__wrapper {
       &-item {
         width: 302px;
         height: 221px;
+
+        &-title {
+          margin-bottom: 10px;
+        }
 
         &-price {
           margin-bottom: 14px;
