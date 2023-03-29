@@ -66,6 +66,10 @@
         z-index: 5;
       }
 
+      .mat-mdc-progress-spinner {
+        --mdc-circular-progress-active-indicator-color: #f6f6f6;
+      }
+
       &-list {
         width: 100%;
 
