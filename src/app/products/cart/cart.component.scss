@@ -1,13 +1,13 @@
 @use "../../shared/variables.scss";
 
 .cart {
-  height: calc(100vh - 210px);
   font-size: 48px;
   margin-left: 93px;
   color: variables.$mainWhite;
+  overflow-y: hidden;
 
   &__title {
-    margin: 28px 0 43px 0;
+    margin: 128px 0 43px 0;
   }
 
   &__total {
