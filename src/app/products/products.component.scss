@@ -56,13 +56,10 @@ mat-spinner {
   z-index: 5;
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 610px) {
   .products {
     font-size: 28px;
 
-    &__wrapper {
-      margin: 0 29px 27px 37px;
-    }
     .center {
       margin: 0 0 15px 0;
     }
