@@ -56,6 +56,10 @@ mat-spinner {
   z-index: 5;
 }
 
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #f6f6f6;
+}
+
 @media screen and (max-width: 610px) {
   .products {
     font-size: 28px;
