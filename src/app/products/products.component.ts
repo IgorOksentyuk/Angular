@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { IData } from '../models/product.model';
@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit {
   displayedProducts: IData[];
   loading$ = this.loadingSvc._loading$;
   subscription: Subscription;
+  @Input() isTransparent = false;
 
   constructor(
     private svc: ProductsService,
@@ -31,6 +32,15 @@ export class ProductsComponent implements OnInit {
 
       this.loadingSvc.hideLoader();
     });
+  }
+
+  @HostListener('window: scroll', ['$event'])
+  onScroll() {
+    if (window.scrollY > 0) {
+      this.isTransparent = true;
+    } else {
+      this.isTransparent = false;
+    }
   }
 
   showMore() {
