@@ -2,16 +2,18 @@
 
 .cart {
   font-size: 48px;
-  margin-left: 93px;
+  display: flex;
+  flex-direction: column;
   color: variables.$mainWhite;
   overflow-y: hidden;
 
   &__title {
-    margin: 128px 0 43px 0;
+    height: 48px;
+    margin: 128px 0 0 90px;
   }
 
   &__total {
-    margin-bottom: 43px;
+    margin: 0 0 48px 90px;
   }
 
   &__wrapper {
@@ -58,33 +60,31 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 610px) {
   .cart {
-    height: auto;
-  }
-}
+    font-size: 36px;
 
-@media screen and (max-width: 750px) {
-  .cart {
-    margin-left: 33px;
+    &__title {
+      margin: 128px 0 0 60px;
+    }
+
+    &__total {
+      margin: 0 0 48px 60px;
+    }
 
     &__wrapper {
-      margin: 0 29px 27px 37px;
-    }
-  }
-}
+      margin: 0;
 
-@media screen and (max-width: 580px) {
-  .cart {
-    &__item {
-      font-size: 28px;
-      width: 302px;
-      height: 221px;
+      &-item {
+        font-size: 28px;
+        width: 302px;
+        height: 221px;
+        margin: 0 0 48px 0;
 
-      &-button {
-        font-size: 24px;
-        max-width: 250px;
-        height: 100px;
+        &-button {
+          font-size: 20px;
+          width: 90%;
+        }
       }
     }
   }
