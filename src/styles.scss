@@ -1,4 +1,5 @@
 @use "app/shared/variables.scss";
+@import url("app/normalize.css");
 
 body {
   background-color: variables.$backgroundBlue;
