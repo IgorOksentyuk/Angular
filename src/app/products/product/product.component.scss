@@ -1,11 +1,11 @@
 @use "../../shared/variables.scss";
 
 .products__wrapper-item {
+  width: 400px;
+  height: 270px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 400px;
-  height: 270px;
   margin: 0 39px 48px 0;
   border-radius: 20px;
   background-color: variables.$mainWhite;
@@ -26,8 +26,8 @@
   .products {
     &__wrapper {
       &-item {
-        width: 302px;
-        height: 221px;
+        width: 300px;
+        height: 220px;
 
         &-title {
           margin-bottom: 10px;
