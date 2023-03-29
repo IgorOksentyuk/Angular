@@ -140,10 +140,15 @@
 
       ::ng-deep .ngx-pagination .current {
         background: none;
+        font-weight: 600;
+        font-size: 38px;
+        color: variables.$backgroundBlue;
       }
 
       ::ng-deep .ngx-pagination a {
-        font-weight: 600;
+        font-size: 36px;
+        color: variables.$mainWhite;
+        transition: all 0.8s ease;
       }
 
       ::ng-deep .ngx-pagination a:hover {
