@@ -2,6 +2,7 @@
 
 .cart {
   font-size: 48px;
+  height: calc(100% - 60px);
   display: flex;
   flex-direction: column;
   color: variables.$mainWhite;
@@ -13,7 +14,8 @@
   }
 
   &__total {
-    margin: 0 0 48px 90px;
+    align-self: flex-end;
+    margin: 0 90px 48px 0;
   }
 
   &__wrapper {
@@ -58,6 +60,13 @@
       }
     }
   }
+
+  .empty-cart {
+    width: 400px;
+    height: 400px;
+    align-self: center;
+    margin-bottom: 40px;
+  }
 }
 
 @media screen and (max-width: 610px) {
@@ -69,7 +78,7 @@
     }
 
     &__total {
-      margin: 0 0 48px 60px;
+      margin: 0 60px 48px 0;
     }
 
     &__wrapper {
@@ -86,6 +95,11 @@
           width: 90%;
         }
       }
+    }
+
+    .empty-cart {
+      width: 200px;
+      height: 200px;
     }
   }
 }
