@@ -2,7 +2,7 @@
 <div class="product">
   <p class="product__title">Products > {{ product?.name }}</p>
 
-  <div class="product__wrapper">
+  <div class="product__wrapper" [ngClass]="{ active: isActiveCard }">
     <u class="product__wrapper-name">{{ product?.name }}</u>
     <p class="product__wrapper-description">{{ product?.description }}</p>
     <p class="product__wrapper-price">{{ product?.price | currency : "₴ " }}</p>
