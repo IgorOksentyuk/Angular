@@ -34,6 +34,7 @@
       justify-content: space-around;
       margin: 0 39px 48px 0;
       border-radius: 20px;
+      box-shadow: 0 0 80px -10px variables.$mainBlack;
       background-color: variables.$mainWhite;
       color: variables.$mainBlack;
 
@@ -57,6 +58,15 @@
         color: variables.$mainWhite;
         background-color: variables.$backgroundGrey;
         cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      &-button:hover {
+        background-color: variables.$btnHover;
+      }
+      &-button:active {
+        background-color: variables.$btnActive;
+        color: variables.$mainBlack;
       }
     }
   }
