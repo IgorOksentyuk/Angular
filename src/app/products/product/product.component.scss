@@ -9,7 +9,9 @@
   margin: 0 39px 48px 0;
   border-radius: 20px;
   background-color: variables.$mainWhite;
+  box-shadow: 0 0 80px -10px variables.$mainBlack;
   color: variables.$mainRed;
+  transition: all 0.3s ease;
 
   &-title {
     margin: 37px 34px 0 34px;
@@ -19,6 +21,14 @@
 
   &-price {
     margin-left: 34px;
+  }
+}
+
+.products__wrapper-item:hover {
+  transform: scale(1.1);
+
+  &-title {
+    transform: scale(1.2);
   }
 }
 
