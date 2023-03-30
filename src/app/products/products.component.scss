@@ -36,6 +36,15 @@
     color: variables.$mainWhite;
     background-color: variables.$backgroundGrey;
     cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  &__btn:hover {
+    background-color: variables.$btnHover;
+  }
+  &__btn:active {
+    background-color: variables.$btnActive;
+    color: variables.$mainBlack;
   }
 
   .center {
