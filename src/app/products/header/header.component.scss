@@ -30,6 +30,13 @@
       height: 40px;
       margin-right: 10px;
     }
+
+    .cart-svg:hover {
+      .cart-svg__item {
+        stroke: variables.$blueHover;
+        transition: stroke 0.3s ease;
+      }
+    }
   }
 
   .item {
@@ -38,6 +45,11 @@
     color: variables.$mainWhite;
     cursor: pointer;
     text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .item:hover {
+    color: variables.$blueHover;
   }
 
   .tooltip {
@@ -82,6 +94,15 @@
             color: variables.$mainWhite;
             background-color: variables.$backgroundGrey;
             cursor: pointer;
+            transition: all 0.3s ease;
+          }
+
+          &-btn:hover {
+            background-color: variables.$btnHover;
+          }
+          &-btn:active {
+            background-color: variables.$btnActive;
+            color: variables.$mainBlack;
           }
         }
 
