@@ -1,5 +1,7 @@
-<header class="header">
+<header class="header" [ngClass]="{ transparent: isTransparent }">
   <div class="header__wrapper">
+    <app-tooltip *ngIf="visibleTool && items.length > 0"></app-tooltip>
+
     <div class="header__wrapper-logo item"></div>
     <a [routerLink]="'/products'" class="item">Products</a>
     <a [routerLink]="'/cart'" class="item">
@@ -42,26 +44,4 @@
   </div>
 
   <a [routerLink]="'/login'" class="item">Log in</a>
-
-  <div *ngIf="visibleTool && items.length >= 1" class="tooltip">
-    <div class="tooltip__wrapper">
-      <div *ngFor="let item of items" class="tooltip__wrapper-item">
-        <div class="tooltip__wrapper-item-line">
-          <p class="tooltip__wrapper-item-line-name">{{ item.name }}</p>
-          <p class="tooltip__wrapper-item-line-count">1</p>
-          <button
-            (click)="removeItem(item.id)"
-            class="tooltip__wrapper-item-line-btn"
-          >
-            Delete
-          </button>
-        </div>
-        <p class="tooltip__wrapper-item-price">
-          {{ item.price | currency : "₴ " }}
-        </p>
-      </div>
-    </div>
-
-    <p class="tooltip__total">Total: {{ totalPrice }} ₴</p>
-  </div>
 </header>
