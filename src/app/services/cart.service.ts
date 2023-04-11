@@ -7,8 +7,9 @@ import { IData } from '../models/product.model';
   providedIn: 'root',
 })
 export class CartService {
-  public items: IData[] = [];
   private _price = new BehaviorSubject<number>(0);
+  private _visibleTool = new BehaviorSubject<boolean>(false);
+  public items: IData[] = [];
   public price$ = this._price.asObservable();
 
   constructor() {}
