@@ -1,21 +1,9 @@
-body {
-  background-color: #ffdf8c;
-}
+@use "app/shared/variables.scss";
+@import url("app/normalize.css");
 
 html,
 body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100vh;
+  background-color: variables.$backgroundBlue;
+  color: variables.$mainBlack;
 }

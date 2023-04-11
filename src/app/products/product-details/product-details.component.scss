@@ -1,39 +1,74 @@
+@use "../../shared/variables.scss";
+
 .product {
-  font-size: 48px;
+  font-size: 42px;
   line-height: 58.09px;
-  max-width: 700px;
   height: calc(100vh - 190px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-left: 93px;
-  background-color: #ffdf8c;
+  background-color: variables.$backgroundBlue;
 
   &__title {
+    font-size: 48px;
+    align-self: start;
     margin: 28px 0 95px 0;
+    color: variables.$mainWhite;
   }
 
-  &__name {
-    margin-bottom: 37px;
-  }
-
-  &__description {
-    margin-bottom: 36px;
-  }
-
-  &__price {
-    margin-bottom: 36px;
-  }
-
-  &__button {
-    font-size: 24px;
-    max-width: 238px;
-    height: 60px;
-    margin: 0 0 29px 30px;
-    padding: 15px 55px;
-    border: none;
+  &__wrapper {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
     border-radius: 24px;
-    color: #f6f6f6;
-    background-color: #fe5f1e;
-    cursor: pointer;
+    background-color: variables.$mainWhite;
+    box-shadow: 0 0 80px -10px variables.$mainBlack;
+    transform: translate(0, -100%);
+    opacity: 0;
+    transition: all 0.8s ease 0s;
+
+    &-name {
+      align-self: center;
+      margin-bottom: 37px;
+    }
+
+    &-description {
+      margin-bottom: 36px;
+    }
+
+    &-price {
+      margin-bottom: 36px;
+    }
+
+    &-button {
+      font-size: 24px;
+      max-width: 238px;
+      height: 60px;
+      margin: 0 0 29px 30px;
+      padding: 15px 55px;
+      align-self: center;
+      border: none;
+      border-radius: 24px;
+      color: variables.$mainWhite;
+      background-color: variables.$backgroundGrey;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    &-button:hover {
+      background-color: variables.$btnHover;
+    }
+
+    &-button:active {
+      background-color: variables.$btnActive;
+      color: variables.$mainBlack;
+    }
+  }
+
+  &__wrapper.active {
+    transform: translate(0, 0);
+    opacity: 1;
   }
 }

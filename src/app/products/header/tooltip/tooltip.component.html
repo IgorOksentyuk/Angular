@@ -1,0 +1,21 @@
+<div class="tooltip">
+  <div class="tooltip__wrapper">
+    <div *ngFor="let item of items" class="tooltip__wrapper-item">
+      <div class="tooltip__wrapper-item-line">
+        <p class="tooltip__wrapper-item-line-name">{{ item.name }}</p>
+        <p class="tooltip__wrapper-item-line-count">1</p>
+        <button
+          (click)="removeItem(item.id)"
+          class="tooltip__wrapper-item-line-btn"
+        >
+          Delete
+        </button>
+      </div>
+      <p class="tooltip__wrapper-item-price">
+        {{ item.price | currency : "₴ " }}
+      </p>
+    </div>
+  </div>
+
+  <p class="tooltip__total">Total: {{ totalPrice }} ₴</p>
+</div>

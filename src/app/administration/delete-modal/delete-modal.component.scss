@@ -1,3 +1,5 @@
+@use "../../shared/variables.scss";
+
 .dialog {
   text-align: center;
 
@@ -8,7 +10,7 @@
   &__text {
     font-size: 36px;
     line-height: 43.57px;
-    color: #232323;
+    color: variables.$mainBlack;
   }
 }
 

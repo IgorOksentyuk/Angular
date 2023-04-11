@@ -1,5 +1,6 @@
+@use "../../shared/variables.scss";
+
 footer {
-  font-size: 36px;
   height: 60px;
 
   &__btn {
@@ -8,14 +9,15 @@ footer {
     padding: 15px 55px;
     border: none;
     border-radius: 24px;
-    color: #f6f6f6;
+    color: variables.$mainWhite;
   }
 
   .right {
+    font-size: 36px;
     align-self: start;
     border: none;
-    background-color: #ffdf8c;
-    color: #232323;
+    background-color: variables.$backgroundBlue;
+    color: variables.$mainWhite;
     margin-left: 54px;
     cursor: pointer;
   }
