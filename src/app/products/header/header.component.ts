@@ -1,14 +1,6 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ElementRef,
-  HostListener,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, ElementRef, HostListener } from '@angular/core';
 
 import { CartService } from 'src/app/services/cart.service';
-import { Subscription } from 'rxjs';
 
 import { IData } from 'src/app/models/product.model';
 
@@ -17,22 +9,14 @@ import { IData } from 'src/app/models/product.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent {
   @Input()
   product: IData;
-  visibleTool: boolean = false;
+  visibleTool = false;
   items: IData[] = this.cartService.getItems();
-  totalPrice: number;
-  price$ = this.cartService.price$;
-  subscription: Subscription;
+  @Input() isTransparent = false;
 
   constructor(private cartService: CartService, private toolTip: ElementRef) {}
-
-  ngOnInit(): void {
-    this.subscription = this.price$.subscribe((res) => {
-      this.totalPrice = Number(res.toFixed(2));
-    });
-  }
 
   getCount() {
     return this.cartService.getCount();
@@ -45,13 +29,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeItem(id: string) {
-    this.cartService.removeItem(id);
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  @HostListener('window: scroll', ['$event'])
+  onScroll() {
+    if (window.scrollY > 0) {
+      this.isTransparent = true;
+    } else {
+      this.isTransparent = false;
     }
   }
 }
