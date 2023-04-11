@@ -8,7 +8,6 @@ import { IData } from '../models/product.model';
 })
 export class CartService {
   private _price = new BehaviorSubject<number>(0);
-  private _visibleTool = new BehaviorSubject<boolean>(false);
   public items: IData[] = [];
   public price$ = this._price.asObservable();
 
