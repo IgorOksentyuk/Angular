@@ -7,29 +7,33 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ChangePriceColorDirective } from './directives/change-price-color.directive';
 
 import { ProductComponent } from './product/product.component';
-import { HeaderComponent } from './header/header.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
   declarations: [
     ProductComponent,
-    HeaderComponent,
     ChangePriceColorDirective,
     ProductDetailsComponent,
     FooterComponent,
     CartComponent,
   ],
-  imports: [CommonModule, ProductsRoutingModule, MatProgressSpinnerModule],
+  imports: [
+    CommonModule,
+    ProductsRoutingModule,
+    MatProgressSpinnerModule,
+    HeaderModule,
+  ],
   providers: [],
   exports: [
     ProductComponent,
-    HeaderComponent,
     ProductDetailsComponent,
     FooterComponent,
     CartComponent,
     MatProgressSpinnerModule,
+    HeaderModule,
   ],
 })
 export class ProductsModule {}
