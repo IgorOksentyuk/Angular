@@ -13,7 +13,6 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductDetailsComponent implements OnInit {
   product: IData | undefined;
   subscription: Subscription;
-  isActiveCard = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,10 +34,6 @@ export class ProductDetailsComponent implements OnInit {
       }
       this.product = res;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.isActiveCard = true;
   }
 
   addToCart(product: IData) {
