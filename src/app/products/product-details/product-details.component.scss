@@ -3,17 +3,17 @@
 .product {
   font-size: 42px;
   line-height: 58.09px;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 93px;
   background-color: variables.$backgroundBlue;
+  z-index: 1;
 
   &__title {
     font-size: 48px;
     align-self: start;
-    margin: 28px 0 95px 0;
+    margin: 130px 0 50px 54px;
     color: variables.$mainWhite;
   }
 
@@ -22,11 +22,11 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin-bottom: 60px;
     border-radius: 24px;
     background-color: variables.$mainWhite;
     box-shadow: 0 0 80px -10px variables.$mainBlack;
-    transform: translate(0, -100%);
-    opacity: 0;
+    opacity: 1;
     transition: all 0.8s ease 0s;
 
     &-name {
@@ -44,8 +44,6 @@
 
     &-button {
       font-size: 24px;
-      max-width: 238px;
-      height: 60px;
       margin: 0 0 29px 30px;
       padding: 15px 55px;
       align-self: center;
@@ -67,8 +65,9 @@
     }
   }
 
-  &__wrapper.active {
-    transform: translate(0, 0);
-    opacity: 1;
+  .back-btn {
+    font-size: 30px;
+    padding: 15px 50px;
+    text-decoration: none;
   }
 }
