@@ -27,7 +27,6 @@
     background-color: variables.$mainWhite;
     box-shadow: 0 0 80px -10px variables.$mainBlack;
     opacity: 1;
-    transition: all 0.8s ease 0s;
 
     &-name {
       align-self: center;
@@ -44,7 +43,6 @@
 
     &-button {
       font-size: 24px;
-      margin: 0 0 29px 30px;
       padding: 15px 55px;
       align-self: center;
       border: none;
@@ -69,5 +67,25 @@
     font-size: 30px;
     padding: 15px 50px;
     text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .product {
+    font-size: 28px;
+
+    &__title {
+      font-size: 36px;
+      line-height: 1.1;
+    }
+
+    &__wrapper {
+      width: 80%;
+      line-height: 1.1;
+    }
+
+    .back-btn {
+      padding: 0 34px;
+    }
   }
 }
