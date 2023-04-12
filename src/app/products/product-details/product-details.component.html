@@ -2,7 +2,7 @@
 <div class="product">
   <p class="product__title">Products > {{ product?.name }}</p>
 
-  <div class="product__wrapper" [ngClass]="{ active: isActiveCard }">
+  <div class="product__wrapper">
     <u class="product__wrapper-name">{{ product?.name }}</u>
     <p class="product__wrapper-description">{{ product?.description }}</p>
     <p class="product__wrapper-price">{{ product?.price | currency : "₴ " }}</p>
@@ -10,5 +10,8 @@
       Add to cart
     </button>
   </div>
+  <a [routerLink]="'/products'" class="product__wrapper-button back-btn"
+    >Back to products</a
+  >
 </div>
 <app-footer></app-footer>
