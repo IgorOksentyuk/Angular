@@ -1,1 +1,1 @@
-# This is online market shop with opportunity to buy, sort, filter, add to the cart products, which are donwnloaded from API.
+An online store with the capability to add products to the cart, filter, and sort products. Additionally, this application includes an admin panel where you can create new products, edit, and delete existing ones.
